@@ -33,9 +33,9 @@ const createCharacter = (name, type) => {
 	}
 };
 
-createCharacter('Kent', 'Ninja');
+// createCharacter('Kent', 'Ninja');
 
-const lowerHP = num => {
+const takeDamage = num => {
 	const character = loadCharacter();
 	character[0].hp = character[0].hp - num;
 	console.log(chalk.red('Ouch you lost ' + num + 'hp'));
@@ -43,21 +43,14 @@ const lowerHP = num => {
 	saveCharacter(character);
 };
 
-const drinkPotion = () => {
+const drinkHealthPotion = () => {
 	const character = loadCharacter();
 	character[0].hp = character[0].hp + 20;
 	saveCharacter(character);
 };
 
-const attack = () => {
-	const character = loadCharacter();
-	console.log();
-};
-
-// attack();
-
 module.exports = {
 	createCharacter,
-	lowerHP,
-	drinkPotion
+	takeDamage,
+	drinkHealthPotion
 };

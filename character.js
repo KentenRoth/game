@@ -1,5 +1,15 @@
 class Character {
-	constructor(name, type, hp, weapon, weaponDamage, stealth, block, dodge) {
+	constructor(
+		name,
+		type,
+		hp,
+		weapon,
+		weaponDamage,
+		stealth,
+		block,
+		dodge,
+		inventory
+	) {
 		this.name = name;
 		this.type = type;
 		this.hp = hp;
@@ -8,6 +18,7 @@ class Character {
 		this.stealth = stealth;
 		this.dodge = dodge;
 		this.block = block;
+		this.inventory = inventory;
 	}
 }
 
@@ -25,10 +36,7 @@ class Ninja extends Character {
 	stealth = 10;
 	dodge = 10;
 	block = 0;
-
-	battleCry() {
-		return console.log('do something');
-	}
+	inventory = [];
 }
 
 class Warrior extends Character {
@@ -45,6 +53,7 @@ class Warrior extends Character {
 	stealth = 5;
 	dodge = 5;
 	block = 5;
+	inventory = [];
 }
 
 class Viking extends Character {
@@ -61,6 +70,7 @@ class Viking extends Character {
 	stealth = 0;
 	dodge = 0;
 	block = 10;
+	inventory = [];
 }
 
 module.exports = {
