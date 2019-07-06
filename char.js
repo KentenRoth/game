@@ -1,24 +1,39 @@
 const fs = require('fs');
 const chalk = require('chalk');
+const charClass = require('./character');
+
+const loadCharacter = () => {
+	try {
+		const charBuffer = fs.readFileSync('character.json');
+		const charJSON = charBuffer.toString();
+		return JSON.parse(charJSON);
+	} catch (e) {
+		return [];
+	}
+};
+
+const saveCharacter = character => {
+	const charJSON = JSON.stringify(character);
+	fs.writeFileSync('character.json', charJSON);
+};
 
 const createCharacter = (name, type) => {
 	const character = loadCharacter();
-	if (character.length === 0) {
-		character.push({
-			name,
-			type,
-			hp: 100,
-			weapon: 'bow',
-			weapon2: 'ninja stars',
-			stealth: 10,
-			dodge: 10,
-			block: 0
-		});
+	if (character.length === 0 && type.toLowerCase() === 'ninja') {
+		character.push(new charClass.Ninja(name));
+		saveCharacter(character);
+	} else if (character.length === 0 && type.toLowerCase() === 'warrior') {
+		character.push(new charClass.Warrior(name));
+		saveCharacter(character);
+	} else if (character.length === 0 && type.toLowerCase() === 'viking') {
+		character.push(new charClass.Viking(name));
 		saveCharacter(character);
 	} else {
-		console.log('You have already created a character');
+		console.log('Only allowed to have 1 character');
 	}
 };
+
+createCharacter('Kent', 'Ninja');
 
 const lowerHP = num => {
 	const character = loadCharacter();
@@ -34,20 +49,12 @@ const drinkPotion = () => {
 	saveCharacter(character);
 };
 
-const saveCharacter = character => {
-	const charJSON = JSON.stringify(character);
-	fs.writeFileSync('character.json', charJSON);
+const attack = () => {
+	const character = loadCharacter();
+	console.log();
 };
 
-const loadCharacter = () => {
-	try {
-		const charBuffer = fs.readFileSync('character.json');
-		const charJSON = charBuffer.toString();
-		return JSON.parse(charJSON);
-	} catch (e) {
-		return [];
-	}
-};
+// attack();
 
 module.exports = {
 	createCharacter,

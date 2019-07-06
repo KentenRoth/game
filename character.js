@@ -1,51 +1,70 @@
 class Character {
-	constructor(name, weapon, phrase) {
+	constructor(name, type, hp, weapon, weaponDamage, stealth, block, dodge) {
 		this.name = name;
-		this.weapon = weapon.toLowerCase();
-		this.phrase = phrase;
-	}
-
-	battleCry() {
-		if (this.weapon.includes('bow')) {
-			return `Before screaming ${this.phrase}, ${this.name} draws their ${
-				this.weapon
-			} to line up a sneak attack.`;
-		}
-
-		if (this.weapon.includes('sword')) {
-			return `As ${this.name} is running into battle they scream ${
-				this.phrase
-			} with their ${this.weapon} drawn.`;
-		}
-
-		return `${this.name} looks down at their ${
-			this.weapon
-		} in hand before yelling ${this.phrase} as they run into battle.`;
-	}
-
-	attack() {
-		if (this.weapon.includes('bow')) {
-			return `${
-				this.name
-			} lines up the shot, takes a deep breath and holds, then lets the arrow fly.`;
-		}
-
-		if (this.weapon.includes('sword')) {
-			return `With a lunge ${this.name} slides their ${
-				this.weapon
-			} into the enemies side.`;
-		}
-
-		return `With ${this.weapon} in hand ${
-			this.name
-		} shrugs and tries to figure out how to use this thing.`;
+		this.type = type;
+		this.hp = hp;
+		this.weapon = weapon;
+		this.weaponDamage = weaponDamage;
+		this.stealth = stealth;
+		this.dodge = dodge;
+		this.block = block;
 	}
 }
 
 class Ninja extends Character {
-	constructor(name, weapon, phrase) {
-		super(name, weapon, phrase);
+	constructor(name) {
+		super(name);
+		this.name = name;
+	}
+
+	name;
+	type = 'Ninja';
+	hp = 100;
+	weapon = 'bow';
+	weaponDamage = 10;
+	stealth = 10;
+	dodge = 10;
+	block = 0;
+
+	battleCry() {
+		return console.log('do something');
 	}
 }
 
-const kent = new Ninja('Kent', 'Bow with diamond tipped arrows', 'AAAHHHHHH');
+class Warrior extends Character {
+	constructor(name) {
+		super(name);
+		this.name = name;
+	}
+
+	name;
+	type = 'Warrior';
+	hp = 150;
+	weapon = 'Sword';
+	weaponDamage = 10;
+	stealth = 5;
+	dodge = 5;
+	block = 5;
+}
+
+class Viking extends Character {
+	constructor(name) {
+		super(name);
+		this.name = name;
+	}
+
+	name;
+	type = 'Viking';
+	hp = 200;
+	weapon = 'Axe';
+	weaponDamage = 10;
+	stealth = 0;
+	dodge = 0;
+	block = 10;
+}
+
+module.exports = {
+	Ninja,
+	Warrior,
+	Viking
+};
