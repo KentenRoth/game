@@ -87,3 +87,12 @@ class Bigfoot extends Enemy {
 	damage = 25;
 	dodge = 40;
 }
+
+module.exports = {
+	Bug,
+	Frog,
+	Bird,
+	Racoon,
+	Deer,
+	Bigfoot
+};
