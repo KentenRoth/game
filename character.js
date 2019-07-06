@@ -2,16 +2,19 @@ class Character {
 	constructor(
 		name,
 		type,
+		level,
 		hp,
 		weapon,
 		weaponDamage,
 		stealth,
 		block,
 		dodge,
-		inventory
+		inventory,
+		xp
 	) {
 		this.name = name;
 		this.type = type;
+		this.level = level;
 		this.hp = hp;
 		this.weapon = weapon;
 		this.weaponDamage = weaponDamage;
@@ -19,6 +22,7 @@ class Character {
 		this.dodge = dodge;
 		this.block = block;
 		this.inventory = inventory;
+		this.xp = xp;
 	}
 }
 
@@ -30,6 +34,7 @@ class Ninja extends Character {
 
 	name;
 	type = 'Ninja';
+	level = 0;
 	hp = 100;
 	weapon = 'bow';
 	weaponDamage = 10;
@@ -37,6 +42,7 @@ class Ninja extends Character {
 	dodge = 10;
 	block = 0;
 	inventory = [];
+	xp = 0;
 }
 
 class Warrior extends Character {
@@ -47,6 +53,7 @@ class Warrior extends Character {
 
 	name;
 	type = 'Warrior';
+	level = 0;
 	hp = 150;
 	weapon = 'Sword';
 	weaponDamage = 10;
@@ -54,6 +61,7 @@ class Warrior extends Character {
 	dodge = 5;
 	block = 5;
 	inventory = [];
+	xp = 0;
 }
 
 class Viking extends Character {
@@ -64,6 +72,7 @@ class Viking extends Character {
 
 	name;
 	type = 'Viking';
+	level = 0;
 	hp = 200;
 	weapon = 'Axe';
 	weaponDamage = 10;
@@ -71,6 +80,7 @@ class Viking extends Character {
 	dodge = 0;
 	block = 10;
 	inventory = [];
+	xp = 0;
 }
 
 module.exports = {
