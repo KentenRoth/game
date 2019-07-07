@@ -1,10 +1,10 @@
 const fs = require('fs');
 const chalk = require('chalk');
-const charClass = require('./character');
+const characterClass = require('../Classes/characterClass');
 
 const loadCharacter = () => {
 	try {
-		const charBuffer = fs.readFileSync('character.json');
+		const charBuffer = fs.readFileSync('../character.json');
 		const charJSON = charBuffer.toString();
 		return JSON.parse(charJSON);
 	} catch (e) {
@@ -14,24 +14,34 @@ const loadCharacter = () => {
 
 const saveCharacter = character => {
 	const charJSON = JSON.stringify(character);
-	fs.writeFileSync('character.json', charJSON);
+	fs.writeFileSync('../character.json', charJSON);
 };
 
 const createCharacter = (name, type) => {
 	const character = loadCharacter();
 	if (character.length === 0 && type.toLowerCase() === 'ninja') {
-		character.push(new charClass.Ninja(name));
+		character.push(new characterClass.Ninja(name));
 		saveCharacter(character);
 	} else if (character.length === 0 && type.toLowerCase() === 'warrior') {
-		character.push(new charClass.Warrior(name));
+		character.push(new characterClass.Warrior(name));
 		saveCharacter(character);
 	} else if (character.length === 0 && type.toLowerCase() === 'viking') {
-		character.push(new charClass.Viking(name));
+		character.push(new characterClass.Viking(name));
 		saveCharacter(character);
+	} else if (
+		type.toLowerCase() !== 'ninja' &&
+		type.toLowerCase() !== 'warrior' &&
+		type.toLowerCase() !== 'viking'
+	) {
+		console.log(
+			'The only types of characters are Ninja, Warrior, or Viking'
+		);
 	} else {
 		console.log('Only allowed to have 1 character');
 	}
 };
+
+createCharacter('Kent', '');
 
 const takeDamage = num => {
 	const character = loadCharacter();

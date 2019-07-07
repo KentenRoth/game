@@ -1,5 +1,5 @@
 const yargs = require('yargs');
-const char = require('./char');
+const char = require('./Functions/characterFunctions');
 
 yargs.version('1.1.0');
 
