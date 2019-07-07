@@ -10,7 +10,8 @@ class Character {
 		block,
 		dodge,
 		inventory,
-		xp
+		xp,
+		location
 	) {
 		this.name = name;
 		this.type = type;
@@ -23,6 +24,7 @@ class Character {
 		this.block = block;
 		this.inventory = inventory;
 		this.xp = xp;
+		this.location = location;
 	}
 }
 
@@ -43,6 +45,7 @@ class Ninja extends Character {
 	block = 0;
 	inventory = [];
 	xp = 0;
+	location = 10;
 }
 
 class Warrior extends Character {
@@ -62,6 +65,7 @@ class Warrior extends Character {
 	block = 5;
 	inventory = [];
 	xp = 0;
+	location = 10;
 }
 
 class Viking extends Character {
@@ -81,6 +85,7 @@ class Viking extends Character {
 	block = 10;
 	inventory = [];
 	xp = 0;
+	location = 10;
 }
 
 module.exports = {

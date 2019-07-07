@@ -23,17 +23,4 @@ yargs.command({
 	}
 });
 
-yargs.command({
-	command: 'damage',
-	builder: {
-		num: {
-			demandOption: true,
-			type: 'number'
-		}
-	},
-	handler(argv) {
-		char.lowerHP(argv.num);
-	}
-});
-
 yargs.parse();

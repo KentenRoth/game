@@ -33,8 +33,6 @@ const createCharacter = (name, type) => {
 	}
 };
 
-// createCharacter('Kent', 'Ninja');
-
 const takeDamage = num => {
 	const character = loadCharacter();
 	character[0].hp = character[0].hp - num;
@@ -49,8 +47,17 @@ const drinkHealthPotion = () => {
 	saveCharacter(character);
 };
 
+const deleteCharacter = () => {
+	let character = loadCharacter();
+	character = [];
+	saveCharacter(character);
+};
+
 module.exports = {
 	createCharacter,
 	takeDamage,
-	drinkHealthPotion
+	drinkHealthPotion,
+	deleteCharacter,
+	saveCharacter,
+	loadCharacter
 };
