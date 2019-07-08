@@ -1,6 +1,7 @@
 class Enemy {
-	constructor(name, hp, weapon, defense, damage, dodge) {
+	constructor(name, type, hp, weapon, defense, damage, dodge) {
 		this.name = name;
+		this.type = type;
 		this.hp = hp;
 		this.weapon = weapon;
 		this.defense = defense;
@@ -15,6 +16,7 @@ class Bug extends Enemy {
 		this.name = name;
 	}
 	name;
+	type = 'Bug';
 	hp = 20;
 	weapon = 'Spit';
 	defense = 0;
@@ -28,6 +30,7 @@ class Frog extends Enemy {
 		this.name = name;
 	}
 	name;
+	type = 'Frog';
 	hp = 35;
 	weapon = 'Tounge';
 	defense = 0;
@@ -41,6 +44,7 @@ class Racoon extends Enemy {
 		this.name = name;
 	}
 	name;
+	type = 'Racoon';
 	hp = 40;
 	weapon = 'claws';
 	defense = 0;
@@ -49,11 +53,12 @@ class Racoon extends Enemy {
 }
 
 class Bird extends Enemy {
-	onstructor(name) {
+	constructor(name) {
 		super(name);
 		this.name = name;
 	}
 	name;
+	type = 'Bird';
 	hp = 30;
 	weapon = 'Beak';
 	defense = 0;
@@ -67,6 +72,7 @@ class Deer extends Enemy {
 		this.name = name;
 	}
 	name;
+	type = 'Deer';
 	hp = 50;
 	weapon = 'Antlers';
 	defense = 4;
@@ -81,6 +87,7 @@ class Bigfoot extends Enemy {
 		this.name = name;
 	}
 	name;
+	type = 'Bigfoot';
 	hp = 200;
 	weapon = 'Fist';
 	defense = 35;

@@ -41,7 +41,7 @@ const createCharacter = (name, type) => {
 	}
 };
 
-createCharacter('Kent', '');
+// createCharacter('Kent', 'Ninja');
 
 const takeDamage = num => {
 	const character = loadCharacter();
