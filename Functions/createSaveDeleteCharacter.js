@@ -1,5 +1,4 @@
 const fs = require('fs');
-const chalk = require('chalk');
 const characterClass = require('../Classes/characterClass');
 
 const loadCharacter = () => {
@@ -41,22 +40,6 @@ const createCharacter = (name, type) => {
 	}
 };
 
-// createCharacter('Kent', 'Ninja');
-
-const takeDamage = num => {
-	const character = loadCharacter();
-	character[0].hp = character[0].hp - num;
-	console.log(chalk.red('Ouch you lost ' + num + 'hp'));
-	console.log(chalk.red.inverse(character[0].hp + ' hp remaining'));
-	saveCharacter(character);
-};
-
-const drinkHealthPotion = () => {
-	const character = loadCharacter();
-	character[0].hp = character[0].hp + 20;
-	saveCharacter(character);
-};
-
 const deleteCharacter = () => {
 	let character = loadCharacter();
 	character = [];
@@ -65,8 +48,6 @@ const deleteCharacter = () => {
 
 module.exports = {
 	createCharacter,
-	takeDamage,
-	drinkHealthPotion,
 	deleteCharacter,
 	saveCharacter,
 	loadCharacter

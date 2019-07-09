@@ -1,5 +1,4 @@
 const fs = require('fs');
-const chalk = require('chalk');
 const enemyClass = require('../Classes/enemyClass');
 
 const loadEnemy = () => {
@@ -11,8 +10,6 @@ const loadEnemy = () => {
 		return [];
 	}
 };
-
-console.log(loadEnemy());
 
 const saveEnemy = enemy => {
 	const enemyJSON = JSON.stringify(enemy);
