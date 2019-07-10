@@ -33,4 +33,32 @@ const player = {
 	}
 };
 
-player.drinkHealthPotion();
+const enemy = {
+	loadEnemy() {
+		return buildEnemy.loadEnemy();
+	},
+
+	saveEnemy(enemy) {
+		return buildEnemy.saveEnemy(enemy);
+	},
+
+	deleteEnemy() {
+		return buildEnemy.deleteEnemy();
+	},
+
+	takeDamage(num) {
+		const enemy = this.loadEnemy();
+		enemy[0].hp = enemy[0].hp - num;
+		console.log(
+			chalk.green('You dealt ' + num + ' damage to the ' + enemy[0].name)
+		);
+		console.log(
+			chalk.green(
+				enemy[0].name +
+					' has ' +
+					chalk.green.inverse(enemy[0].hp + ' hp remaining.')
+			)
+		);
+		this.saveEnemy(enemy);
+	}
+};

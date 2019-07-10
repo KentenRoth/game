@@ -45,6 +45,8 @@ const createEnemy = (name, type) => {
 	}
 };
 
+// createEnemy('Swamp Ape', 'BigFoot');
+
 const deleteEnemy = () => {
 	let enemy = loadEnemy();
 	enemy = [];
