@@ -16,6 +16,22 @@ const player = {
 		return buildCharacter.deleteCharacter();
 	},
 
+	increaseXP(num) {
+		const character = this.loadCharacter();
+		character[0].xp = character[0].xp + num;
+		this.saveCharacter(character);
+		if (character[0].xp >= 100) {
+			this.levelUp();
+		}
+	},
+
+	levelUp() {
+		const character = this.loadCharacter();
+		character[0].level = character[0].level + 1;
+		character[0].xp = character[0].xp - 100;
+		this.saveCharacter(character);
+	},
+
 	takeDamage(num) {
 		const character = this.loadCharacter();
 		character[0].hp = character[0].hp - num;
@@ -62,3 +78,5 @@ const enemy = {
 		this.saveEnemy(enemy);
 	}
 };
+
+player.increaseXP(60);
