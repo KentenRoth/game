@@ -29,6 +29,8 @@ const player = {
 		const character = this.loadCharacter();
 		character[0].level = character[0].level + 1;
 		character[0].xp = character[0].xp - 100;
+		console.log(chalk.magenta('You just leveled Up!'));
+		console.log(chalk.magenta.inverse(`Level ${character[0].level}`));
 		this.saveCharacter(character);
 	},
 
