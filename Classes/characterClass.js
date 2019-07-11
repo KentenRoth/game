@@ -38,7 +38,7 @@ class Ninja extends Character {
 	type = 'Ninja';
 	level = 0;
 	hp = 100;
-	weapon = 'bow';
+	weapon = 'Bow';
 	weaponDamage = 10;
 	stealth = 10;
 	dodge = 10;
