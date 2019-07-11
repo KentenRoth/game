@@ -34,12 +34,6 @@ const player = {
 		return this.saveCharacter(character);
 	},
 
-	attack() {
-		let character = this.loadCharacter();
-		let painDished = character[0].weaponDamage;
-		enemy.takeDamage(painDished);
-	},
-
 	stats() {
 		let character = this.loadCharacter();
 		console.log('Name: ' + character[0].name);
@@ -108,4 +102,39 @@ const enemy = {
 	}
 };
 
-player.stats();
+const attack = {
+	playerAttack() {
+		let character = player.loadCharacter();
+		let badGuy = enemy.loadEnemy();
+		let painDished = character[0].weaponDamage;
+
+		if (badGuy[0].defense === 0 && badGuy[0].dodge === 0) {
+			return enemy.takeDamage(painDished);
+		}
+		this.attackMath();
+	},
+	// enemyAttack() {
+	// 	let enemy = this.loadEnemy();
+	// 	let painDished = enemy[0].damage;
+	// 	player.takeDamage(painDished);
+	// },
+
+	attackMath() {
+		let character = player.loadCharacter();
+		let badGuy = enemy.loadEnemy();
+		let defenseNumber = Math.floor(Math.random() * 101);
+		let dodgeNumber = Math.floor(Math.random() * 101);
+
+		if (dodgeNumber < badGuy[0].dodge) {
+			console.log(
+				chalk.yellow(
+					`With some nifty moves the ${
+						badGuy[0].name
+					} dodged your attack`
+				)
+			);
+		}
+	}
+};
+
+attack.playerAttack();

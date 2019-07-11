@@ -22,7 +22,7 @@ class Bug extends Enemy {
 	weapon = 'Spit';
 	defense = 0;
 	damage = 2;
-	dodge = 5;
+	dodge = 15;
 	xpValue = 5;
 }
 
@@ -35,9 +35,9 @@ class Frog extends Enemy {
 	type = 'Frog';
 	hp = 35;
 	weapon = 'Tounge';
-	defense = 0;
+	defense = 5;
 	damage = 5;
-	dodge = 5;
+	dodge = 15;
 	xpValue = 8;
 }
 
@@ -50,9 +50,9 @@ class Racoon extends Enemy {
 	type = 'Racoon';
 	hp = 40;
 	weapon = 'claws';
-	defense = 0;
+	defense = 5;
 	damage = 15;
-	dodge = 10;
+	dodge = 20;
 	xpValue = 12;
 }
 
@@ -65,7 +65,7 @@ class Bird extends Enemy {
 	type = 'Bird';
 	hp = 30;
 	weapon = 'Beak';
-	defense = 0;
+	defense = 10;
 	damage = 15;
 	dodge = 20;
 	xpValue = 12;
@@ -80,9 +80,9 @@ class Deer extends Enemy {
 	type = 'Deer';
 	hp = 50;
 	weapon = 'Antlers';
-	defense = 4;
+	defense = 20;
 	damage = 10;
-	dodge = 3;
+	dodge = 25;
 	xpValue = 18;
 }
 
@@ -96,9 +96,9 @@ class Bigfoot extends Enemy {
 	type = 'Bigfoot';
 	hp = 200;
 	weapon = 'Fist';
-	defense = 35;
+	defense = 45;
 	damage = 25;
-	dodge = 40;
+	dodge = 50;
 	xpValue = 35;
 }
 
