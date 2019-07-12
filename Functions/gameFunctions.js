@@ -66,7 +66,7 @@ const player = {
 	}
 };
 
-const enemy = {
+const badGuy = {
 	loadEnemy() {
 		return buildEnemy.loadEnemy();
 	},
@@ -105,35 +105,49 @@ const enemy = {
 const attack = {
 	playerAttack() {
 		let character = player.loadCharacter();
-		let badGuy = enemy.loadEnemy();
+		let enemy = badGuy.loadEnemy();
 		let painDished = character[0].weaponDamage;
+		let stealthShotNumber = Math.floor(Math.random() * 101);
 
-		if (badGuy[0].defense === 0 && badGuy[0].dodge === 0) {
-			return enemy.takeDamage(painDished);
+		if (character[0].stealth >= stealthShotNumber) {
+			const sneakPainDished = painDished * 2;
+			console.log(chalk.green.inverse('Successful Sneak Attack'));
+			return badGuy.takeDamage(sneakPainDished);
 		}
-		this.attackMath();
+
+		if (enemy[0].defense === 0 && enemy[0].dodge === 0) {
+			return badGuy.takeDamage(painDished);
+		}
+
+		this.playerAttackMath();
 	},
+
 	// enemyAttack() {
 	// 	let enemy = this.loadEnemy();
 	// 	let painDished = enemy[0].damage;
 	// 	player.takeDamage(painDished);
 	// },
 
-	attackMath() {
+	playerAttackMath() {
 		let character = player.loadCharacter();
-		let badGuy = enemy.loadEnemy();
-		let defenseNumber = Math.floor(Math.random() * 101);
+		let enemy = badGuy.loadEnemy();
 		let dodgeNumber = Math.floor(Math.random() * 101);
+		const playerDamageNumber = character[0].weaponDamage;
+		const enemyDefenseNumber = enemy[0].defense / 100;
 
-		if (dodgeNumber < badGuy[0].dodge) {
-			console.log(
+		if (dodgeNumber < enemy[0].dodge) {
+			return console.log(
 				chalk.yellow(
 					`With some nifty moves the ${
-						badGuy[0].name
+						enemy[0].name
 					} dodged your attack`
 				)
 			);
 		}
+		const damageDealt = (character[0].damage = Math.round(
+			playerDamageNumber - enemyDefenseNumber * playerDamageNumber
+		));
+		return badGuy.takeDamage(damageDealt);
 	}
 };
 
