@@ -79,12 +79,6 @@ const badGuy = {
 		return buildEnemy.deleteEnemy();
 	},
 
-	attack() {
-		let enemy = this.loadEnemy();
-		let painDished = enemy[0].damage;
-		player.takeDamage(painDished);
-	},
-
 	takeDamage(num) {
 		const enemy = this.loadEnemy();
 		enemy[0].hp = enemy[0].hp - num;
@@ -104,10 +98,10 @@ const badGuy = {
 
 const attack = {
 	playerAttack() {
-		let character = player.loadCharacter();
-		let enemy = badGuy.loadEnemy();
-		let painDished = character[0].weaponDamage;
-		let stealthShotNumber = Math.floor(Math.random() * 101);
+		const character = player.loadCharacter();
+		const enemy = badGuy.loadEnemy();
+		const painDished = character[0].weaponDamage;
+		const stealthShotNumber = Math.floor(Math.random() * 101);
 
 		if (character[0].stealth >= stealthShotNumber) {
 			const sneakPainDished = painDished * 2;
@@ -122,16 +116,32 @@ const attack = {
 		this.playerAttackMath();
 	},
 
-	// enemyAttack() {
-	// 	let enemy = this.loadEnemy();
-	// 	let painDished = enemy[0].damage;
-	// 	player.takeDamage(painDished);
-	// },
+	enemyAttack() {
+		const enemy = badGuy.loadEnemy();
+		const character = player.loadCharacter();
+		const dodgeNumber = Math.floor(Math.random() * 101);
+		const enemyDamageNumber = enemy[0].damage;
+		const playerDefenseNumber = character[0].block;
+
+		if (dodgeNumber < character[0].dodge) {
+			return console.log(
+				chalk.green(
+					`You dodge the incoming attack from the ${enemy[0].name}`
+				)
+			);
+		}
+
+		const damageDealt = (enemy[0].damage = Math.round(
+			enemyDamageNumber - playerDefenseNumber * enemyDamageNumber
+		));
+
+		return player.takeDamage(damageDealt);
+	},
 
 	playerAttackMath() {
-		let character = player.loadCharacter();
-		let enemy = badGuy.loadEnemy();
-		let dodgeNumber = Math.floor(Math.random() * 101);
+		const character = player.loadCharacter();
+		const enemy = badGuy.loadEnemy();
+		const dodgeNumber = Math.floor(Math.random() * 101);
 		const playerDamageNumber = character[0].weaponDamage;
 		const enemyDefenseNumber = enemy[0].defense / 100;
 
@@ -147,7 +157,8 @@ const attack = {
 		const damageDealt = (character[0].damage = Math.round(
 			playerDamageNumber - enemyDefenseNumber * playerDamageNumber
 		));
-		return badGuy.takeDamage(damageDealt);
+		badGuy.takeDamage(damageDealt);
+		return this.enemyAttack();
 	}
 };
 
