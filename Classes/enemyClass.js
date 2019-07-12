@@ -86,6 +86,11 @@ class Deer extends Enemy {
 	xpValue = 18;
 }
 
+// Need cave animals for dungeons
+// Bat
+// Salamander
+// Snake
+
 // Boss
 class Bigfoot extends Enemy {
 	constructor(name) {
