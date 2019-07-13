@@ -93,6 +93,14 @@ const badGuy = {
 			)
 		);
 		return this.saveEnemy(enemy);
+	},
+	stats() {
+		let enemy = badGuy.loadEnemy();
+		console.log('Name: ' + enemy[0].name);
+		console.log('HP: ' + enemy[0].hp);
+		console.log(
+			'Weapon/Damage: ' + enemy[0].weapon + '/' + enemy[0].damage
+		);
 	}
 };
 
@@ -162,4 +170,4 @@ const attack = {
 	}
 };
 
-attack.playerAttack();
+player.stats();
