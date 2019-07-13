@@ -20,13 +20,13 @@ const createCharacter = (name, type) => {
 	const character = loadCharacter();
 	if (character.length === 0 && type.toLowerCase() === 'ninja') {
 		character.push(new characterClass.Ninja(name));
-		saveCharacter(character);
+		return saveCharacter(character[0]);
 	} else if (character.length === 0 && type.toLowerCase() === 'warrior') {
 		character.push(new characterClass.Warrior(name));
-		saveCharacter(character);
+		return saveCharacter(character[0]);
 	} else if (character.length === 0 && type.toLowerCase() === 'viking') {
 		character.push(new characterClass.Viking(name));
-		saveCharacter(character);
+		return saveCharacter(character[0]);
 	} else if (
 		type.toLowerCase() !== 'ninja' &&
 		type.toLowerCase() !== 'warrior' &&
@@ -43,7 +43,7 @@ const createCharacter = (name, type) => {
 const deleteCharacter = () => {
 	let character = loadCharacter();
 	character = [];
-	saveCharacter(character);
+	return saveCharacter(character);
 };
 
 module.exports = {
