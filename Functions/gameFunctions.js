@@ -3,6 +3,8 @@ const chalk = require('chalk');
 const buildCharacter = require('./createSaveDeleteCharacter');
 const buildEnemy = require('./createSaveDeleteEnemy');
 
+// ********** Player Functions ********** \\
+
 const player = {
 	loadCharacter() {
 		return buildCharacter.loadCharacter();
@@ -54,6 +56,9 @@ const player = {
 		character[0].hp = character[0].hp - num;
 		console.log(chalk.red('Ouch you lost ' + num + ' hp'));
 		console.log(chalk.red.inverse(character[0].hp + ' hp remaining'));
+		if (character[0].hp <= 0) {
+			return attack.playerDied();
+		}
 		return this.saveCharacter(character);
 	},
 
@@ -65,6 +70,8 @@ const player = {
 		return this.saveCharacter(character);
 	}
 };
+
+// ********** Enemy Functions ********** \\
 
 const badGuy = {
 	loadEnemy() {
@@ -92,9 +99,15 @@ const badGuy = {
 					chalk.green.inverse(enemy[0].hp + ' hp remaining.')
 			)
 		);
+
+		if (enemy[0].hp <= 0) {
+			return attack.enemyDied();
+		}
 		return this.saveEnemy(enemy);
 	}
 };
+
+// ********** Attacking Functions ********** \\
 
 const attack = {
 	playerAttack() {
@@ -162,4 +175,22 @@ const attack = {
 	}
 };
 
-attack.playerAttack();
+// ********** Death Functions ********** \\
+
+const death = {
+	playerDied() {
+		const enemy = badGuy.loadEnemy();
+		console.log(`The ${enemy[0].name} finished you off`);
+		console.log('You will now have to create a new character');
+		console.log('Next time keep a better eye on your HP!');
+		player.deleteCharacter();
+	},
+
+	enemyDied() {
+		const enemy = badGuy.loadEnemy();
+		console.log(`Congrats you killed the ${enemy[0].name}`);
+		badGuy.deleteEnemy();
+	}
+};
+
+badGuy.takeDamage(10);
