@@ -54,10 +54,11 @@ const player = {
 	takeDamage(num) {
 		character.hp = character.hp - num;
 		console.log(chalk.red('Ouch you lost ' + num + ' hp'));
-		console.log(chalk.red.inverse(character.hp + ' hp remaining'));
 		if (character.hp <= 0) {
-			return attack.playerDied();
+			return death.playerDied();
 		}
+		console.log(chalk.red.inverse(character.hp + ' hp remaining'));
+
 		return this.saveCharacter(character);
 	},
 
@@ -82,9 +83,14 @@ const badGuy = {
 
 	takeDamage(num) {
 		enemy.hp = enemy.hp - num;
+
 		console.log(
 			chalk.green('You dealt ' + num + ' damage to the ' + enemy.name)
 		);
+		if (enemy.hp <= 0) {
+			return death.enemyDied();
+		}
+
 		console.log(
 			chalk.green(
 				enemy.name +
@@ -92,10 +98,7 @@ const badGuy = {
 					chalk.green.inverse(enemy.hp + ' hp remaining.')
 			)
 		);
-
-		if (enemy.hp <= 0) {
-			return attack.enemyDied();
-		}
+		attack.enemyAttack();
 		return this.saveEnemy(enemy);
 	},
 	stats() {
@@ -129,7 +132,7 @@ const attack = {
 	enemyAttack() {
 		const dodgeNumber = Math.floor(Math.random() * 101);
 		const enemyDamageNumber = enemy.damage;
-		const playerDefenseNumber = character.block;
+		const playerDefenseNumber = character.block / 100;
 
 		if (dodgeNumber < character.dodge) {
 			return console.log(
@@ -152,17 +155,18 @@ const attack = {
 		const enemyDefenseNumber = enemy.defense / 100;
 
 		if (dodgeNumber < enemy.dodge) {
-			return console.log(
+			console.log(
 				chalk.yellow(
 					`With some nifty moves the ${enemy.name} dodged your attack`
 				)
 			);
+			return this.enemyAttack();
 		}
+
 		const damageDealt = (character.damage = Math.round(
 			playerDamageNumber - enemyDefenseNumber * playerDamageNumber
 		));
-		badGuy.takeDamage(damageDealt);
-		return this.enemyAttack();
+		return badGuy.takeDamage(damageDealt);
 	}
 };
 
