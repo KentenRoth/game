@@ -3,7 +3,9 @@ const chalk = require('chalk');
 const buildCharacter = require('./createSaveDeleteCharacter');
 const buildEnemy = require('./createSaveDeleteEnemy');
 
-// ********** Player Functions ********** \\
+// chalk.rgb(num,num,num)('words')
+// chalk.hex(hexcode)('words)
+
 loadCharacter = () => {
 	return buildCharacter.loadCharacter();
 };
@@ -15,6 +17,8 @@ loadEnemy = () => {
 const character = loadCharacter();
 const enemy = loadEnemy();
 
+// ********** Player Functions ********** \\
+
 const player = {
 	saveCharacter(character) {
 		return buildCharacter.saveCharacter(character);
@@ -22,22 +26,6 @@ const player = {
 
 	deleteCharacter() {
 		return buildCharacter.deleteCharacter();
-	},
-
-	increaseXP(num) {
-		character.xp = character.xp + num;
-		this.saveCharacter(character);
-		if (character.xp >= 100) {
-			this.levelUp();
-		}
-	},
-
-	levelUp() {
-		characterlevel = character.level + 1;
-		character.xp = character.xp - 100;
-		console.log(chalk.magenta('You just leveled Up!'));
-		console.log(chalk.magenta.inverse(`Level ${character.level}`));
-		return this.saveCharacter(character);
 	},
 
 	stats() {
@@ -52,7 +40,7 @@ const player = {
 	},
 
 	takeDamage(num) {
-		character.hp = character.hp - num;
+		character.hp -= num;
 		console.log(chalk.red('Ouch you lost ' + num + ' hp'));
 		if (character.hp <= 0) {
 			return death.playerDied();
@@ -63,7 +51,7 @@ const player = {
 	},
 
 	drinkHealthPotion() {
-		character.hp = character.hp + 20;
+		character.hp += 20;
 		console.log(chalk.green('That was one tasty health potion +20 hp'));
 		console.log(chalk.green.inverse(character.hp + ' hp remaining'));
 		return this.saveCharacter(character);
@@ -182,11 +170,50 @@ const death = {
 
 	enemyDied() {
 		console.log(`Congrats you killed the ${enemy.name}`);
+		leveling.increaseXP(enemy.xpValue);
 		badGuy.deleteEnemy();
 	},
 
 	itemDropOnDeath() {
 		// TODO add in function to see if an item was dropped upon killing enemy
+	}
+};
+
+// ********** Leveling Functions ********** \\
+
+const leveling = {
+	increaseXP(num) {
+		character.xp += num;
+		player.saveCharacter(character);
+		if (character.xp >= 100) {
+			this.levelUp();
+		}
+	},
+
+	levelUp() {
+		character.level++;
+		character.xp -= 100;
+		if (character.level % 3 === 0) {
+			this.levelUpStats();
+		}
+		console.log(chalk.magenta('You just leveled Up!'));
+		console.log(chalk.magenta.inverse(`Level ${character.level}`));
+		return player.saveCharacter(character);
+	},
+
+	levelUpStats() {
+		if (character.weaponDamage < character.maxWeaponDamage) {
+			character.weaponDamage += 5;
+		}
+		if (character.stealth < character.maxStealth) {
+			character.stealth += 5;
+		}
+		if (character.dodge < character.maxDodge) {
+			character.dodge += 5;
+		}
+		if (character.block < character.maxBlock) {
+			character.block += 5;
+		}
 	}
 };
 
