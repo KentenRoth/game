@@ -20,12 +20,15 @@ const createCharacter = (name, type) => {
 	const character = loadCharacter();
 	if (character.length === 0 && type.toLowerCase() === 'ninja') {
 		character.push(new characterClass.Ninja(name));
+		console.log('Character Created!');
 		return saveCharacter(character[0]);
 	} else if (character.length === 0 && type.toLowerCase() === 'warrior') {
 		character.push(new characterClass.Warrior(name));
+		console.log('Character Created!');
 		return saveCharacter(character[0]);
 	} else if (character.length === 0 && type.toLowerCase() === 'viking') {
 		character.push(new characterClass.Viking(name));
+		console.log('Character Created!');
 		return saveCharacter(character[0]);
 	} else if (
 		type.toLowerCase() !== 'ninja' &&

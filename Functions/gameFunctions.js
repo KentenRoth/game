@@ -217,4 +217,19 @@ const leveling = {
 	}
 };
 
-attack.playerAttack();
+// ********** Inventory Management ********** \\
+
+const inventory = {
+	addItemToInventrory(item) {
+		if (character.inventory.length > 4) {
+			return console.log('You only have 5 inventory slots.');
+		}
+		character.inventory.push(item);
+		return player.saveCharacter(character);
+	},
+
+	dropItemFromInventory(item) {
+		// TODO: See if item is in inventory
+		// TODO: Drop selected item from inventory
+	}
+};
