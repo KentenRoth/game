@@ -48,13 +48,6 @@ const player = {
 		console.log(chalk.red.inverse(character.hp + ' hp remaining'));
 
 		return this.saveCharacter(character);
-	},
-
-	drinkHealthPotion() {
-		character.hp += 20;
-		console.log(chalk.green('That was one tasty health potion +20 hp'));
-		console.log(chalk.green.inverse(character.hp + ' hp remaining'));
-		return this.saveCharacter(character);
 	}
 };
 
@@ -228,8 +221,28 @@ const inventory = {
 		return player.saveCharacter(character);
 	},
 
+	itemInInventory(item, action) {
+		if (character.inventory.includes(item)) {
+			if (item === 'health potion') {
+				return this.drinkHealthPotion();
+			}
+			return this.dropItemFromInventory(item);
+		}
+		return console.log('Item not found in inventory');
+	},
+
 	dropItemFromInventory(item) {
-		// TODO: See if item is in inventory
-		// TODO: Drop selected item from inventory
+		const index = character.inventory.indexOf(item);
+		if (index > -1) {
+			character.inventory.splice(index, 1);
+			return player.saveCharacter(character);
+		}
+	},
+
+	drinkHealthPotion() {
+		character.hp += 20;
+		console.log(chalk.green('That was one tasty health potion +20 hp'));
+		console.log(chalk.green.inverse(character.hp + ' hp remaining'));
+		return player.saveCharacter(character);
 	}
 };
