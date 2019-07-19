@@ -4,6 +4,7 @@ class Character {
 		type,
 		level,
 		hp,
+		maxHp,
 		weapon,
 		weaponDamage,
 		maxWeaponDamage,
@@ -21,6 +22,7 @@ class Character {
 		this.type = type;
 		this.level = level;
 		this.hp = hp;
+		this.maxHp = maxHp;
 		this.weapon = weapon;
 		this.weaponDamage = weaponDamage;
 		this.maxWeaponDamage = maxWeaponDamage;
@@ -46,6 +48,7 @@ class Ninja extends Character {
 	type = 'Ninja';
 	level = 0;
 	hp = 100;
+	maxHp = 175;
 	weapon = 'Bow';
 	weaponDamage = 10;
 	maxWeaponDamage = 50;
@@ -70,6 +73,7 @@ class Warrior extends Character {
 	type = 'Warrior';
 	level = 0;
 	hp = 150;
+	maxHp = 225;
 	weapon = 'Sword';
 	weaponDamage = 10;
 	maxWeaponDamage = 50;
@@ -94,6 +98,7 @@ class Viking extends Character {
 	type = 'Viking';
 	level = 0;
 	hp = 200;
+	maxHp = 275;
 	weapon = 'Axe';
 	weaponDamage = 10;
 	maxWeaponDamage = 50;
