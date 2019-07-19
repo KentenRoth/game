@@ -221,7 +221,7 @@ const inventory = {
 		return player.saveCharacter(character);
 	},
 
-	itemInInventory(item, action) {
+	itemInInventory(item) {
 		if (character.inventory.includes(item)) {
 			if (item === 'health potion') {
 				return this.drinkHealthPotion();
