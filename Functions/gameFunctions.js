@@ -195,6 +195,9 @@ const leveling = {
 	},
 
 	levelUpStats() {
+		if (character.hp < character.maxHp) {
+			character.hp += 5;
+		}
 		if (character.weaponDamage < character.maxWeaponDamage) {
 			character.weaponDamage += 5;
 		}
