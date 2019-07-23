@@ -83,7 +83,6 @@ const badGuy = {
 		return this.saveEnemy(enemy);
 	},
 	stats() {
-		let enemy = badGuy.loadEnemy();
 		console.log('Name: ' + enemy.name);
 		console.log('HP: ' + enemy.hp);
 		console.log('Weapon/Damage: ' + enemy.weapon + '/' + enemy.damage);
@@ -249,8 +248,6 @@ const inventory = {
 		return player.saveCharacter(character);
 	}
 };
-
-buildCharacter.createCharacter('Kent', 'Ninja');
 
 module.exports = {
 	loadCharacter,

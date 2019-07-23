@@ -3,7 +3,7 @@ const characterClass = require('../Classes/characterClass');
 
 const loadCharacter = () => {
 	try {
-		const charBuffer = fs.readFileSync('../character.json');
+		const charBuffer = fs.readFileSync('character.json');
 		const charJSON = charBuffer.toString();
 		return JSON.parse(charJSON);
 	} catch (e) {
@@ -13,7 +13,7 @@ const loadCharacter = () => {
 
 const saveCharacter = character => {
 	const charJSON = JSON.stringify(character);
-	fs.writeFileSync('../character.json', charJSON);
+	fs.writeFileSync('character.json', charJSON);
 };
 
 const saveNewCharacter = character => {
