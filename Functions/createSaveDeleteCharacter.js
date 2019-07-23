@@ -16,20 +16,35 @@ const saveCharacter = character => {
 	fs.writeFileSync('../character.json', charJSON);
 };
 
+const saveNewCharacter = character => {
+	const charJSON = JSON.stringify(character);
+	fs.writeFileSync('character.json', charJSON);
+};
+
+const currentCharacter = () => {
+	try {
+		const charBuffer = fs.readFileSync('character.json');
+		const charJSON = charBuffer.toString();
+		return JSON.parse(charJSON);
+	} catch (e) {
+		return [];
+	}
+};
+
 const createCharacter = (name, type) => {
-	const character = loadCharacter();
+	const character = currentCharacter();
 	if (character.length === 0 && type.toLowerCase() === 'ninja') {
 		character.push(new characterClass.Ninja(name));
 		console.log('Character Created!');
-		return saveCharacter(character[0]);
+		return saveNewCharacter(character[0]);
 	} else if (character.length === 0 && type.toLowerCase() === 'warrior') {
 		character.push(new characterClass.Warrior(name));
 		console.log('Character Created!');
-		return saveCharacter(character[0]);
+		return saveNewCharacter(character[0]);
 	} else if (character.length === 0 && type.toLowerCase() === 'viking') {
 		character.push(new characterClass.Viking(name));
 		console.log('Character Created!');
-		return saveCharacter(character[0]);
+		return saveNewCharacter(character[0]);
 	} else if (
 		type.toLowerCase() !== 'ninja' &&
 		type.toLowerCase() !== 'warrior' &&

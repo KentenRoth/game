@@ -249,3 +249,16 @@ const inventory = {
 		return player.saveCharacter(character);
 	}
 };
+
+buildCharacter.createCharacter('Kent', 'Ninja');
+
+module.exports = {
+	loadCharacter,
+	loadEnemy,
+	player,
+	badGuy,
+	attack,
+	death,
+	leveling,
+	inventory
+};
