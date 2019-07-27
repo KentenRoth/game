@@ -260,6 +260,23 @@ const moving = {
 		player.saveCharacter(character);
 	},
 
+	enterNEDungeon() {
+		character.location = 'nw6';
+		player.saveCharacter(character);
+	},
+	enterSEDungeon() {
+		character.location = 'se6';
+		player.saveCharacter(character);
+	},
+	enterSWDungeon() {
+		character.location = 'sw6';
+		player.saveCharacter(character);
+	},
+	enterNWDungeon() {
+		character.location = 'nw6';
+		player.saveCharacter(character);
+	},
+
 	goNorth() {
 		let number = this.gettingLocationNumber();
 		number -= 1;

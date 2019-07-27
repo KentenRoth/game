@@ -11,3 +11,7 @@ const upperWorld = {
 		description: 'this is part three'
 	}
 };
+
+module.exports = {
+	upperWorld
+};
