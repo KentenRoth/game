@@ -1,5 +1,5 @@
 const yargs = require('yargs');
-const char = require('./Functions/createSaveDeleteCharacter');
+const char = require('../Functions/createSaveDeleteCharacter');
 
 yargs.version('1.1.0');
 

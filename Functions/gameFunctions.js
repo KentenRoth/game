@@ -249,6 +249,39 @@ const inventory = {
 	}
 };
 
+const moving = {
+	gettingLocationNumber() {
+		return parseInt(character.location.charAt(2));
+	},
+
+	newLocationPosition(number) {
+		const preFix = character.location.slice(0, 2);
+		character.location = `${preFix}${number}`;
+		player.saveCharacter(character);
+	},
+
+	goNorth() {
+		let number = this.gettingLocationNumber();
+		number -= 1;
+		this.newLocationPosition(number);
+	},
+	goEast() {
+		let number = this.gettingLocationNumber();
+		number -= 5;
+		this.newLocationPosition(number);
+	},
+	goSouth() {
+		let number = this.gettingLocationNumber();
+		number += 1;
+		this.newLocationPosition(number);
+	},
+	goWest() {
+		let number = this.gettingLocationNumber();
+		number += 5;
+		this.newLocationPosition();
+	}
+};
+
 module.exports = {
 	loadCharacter,
 	loadEnemy,
@@ -257,5 +290,6 @@ module.exports = {
 	attack,
 	death,
 	leveling,
-	inventory
+	inventory,
+	moving
 };

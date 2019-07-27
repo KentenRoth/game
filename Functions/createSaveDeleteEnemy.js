@@ -3,7 +3,7 @@ const enemyClass = require('../Classes/enemyClass');
 
 const loadEnemy = () => {
 	try {
-		const enemyBuffer = fs.readFileSync('enemy.json');
+		const enemyBuffer = fs.readFileSync('../enemy.json');
 		const enemyJSON = enemyBuffer.toString();
 		return JSON.parse(enemyJSON);
 	} catch (e) {

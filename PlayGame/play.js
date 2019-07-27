@@ -1,4 +1,4 @@
-const play = require('./Functions/gameFunctions');
+const play = require('../Functions/gameFunctions');
 
 const readline = require('readline');
 
