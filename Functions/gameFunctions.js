@@ -278,7 +278,7 @@ const moving = {
 	goWest() {
 		let number = this.gettingLocationNumber();
 		number += 5;
-		this.newLocationPosition();
+		this.newLocationPosition(number);
 	}
 };
 
