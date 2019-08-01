@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const readline = require('readline');
 
 const buildCharacter = require('./createSaveDeleteCharacter');
 const buildEnemy = require('./createSaveDeleteEnemy');
@@ -245,13 +246,13 @@ const inventory = {
 		character.hp += 20;
 		console.log(chalk.green('That was one tasty health potion +20 hp'));
 		console.log(chalk.green.inverse(character.hp + ' hp remaining'));
-		return player.saveCharacter(character);
+		return this.dropItemFromInventory('health potion');
 	}
 };
 
 const moving = {
 	gettingLocationNumber() {
-		return parseInt(character.location.charAt(2));
+		return parseInt(character.location.slice(2, character.location.length));
 	},
 
 	newLocationPosition(number) {
@@ -299,6 +300,120 @@ const moving = {
 	}
 };
 
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout
+});
+
+const playGame = {
+	anyDirection() {
+		rl.on('line', input => {
+			if (input.toLowerCase() === 'north') {
+				return moving.goNorth();
+			}
+			if (input.toLowerCase() === 'east') {
+				return moving.goEast();
+			}
+			if (input.toLowerCase() === 'south') {
+				return moving.goSouth();
+			}
+			if (input.toLowerCase() === 'west') {
+				return moving.goWest();
+			}
+			if (input.toLowerCase() === 'attack') {
+				if (enemy.length !== 0) {
+					return player.attack();
+				} else {
+					return console.log(
+						'You spin around to do an epic attack, but there is nothing there.'
+					);
+				}
+			}
+			if (input.toLowerCase() === 'drink potion') {
+				return inventory.itemInInventory('health potion');
+			}
+
+			if (input.toLowerCase() === 'exit') {
+				rl.close();
+			}
+		});
+	},
+
+	cannotGoNorth() {
+		rl.on('line', input => {
+			if (input.toLowerCase() === 'north') {
+				return console.log('cannot go North');
+			}
+		});
+	},
+	cannotGoEast() {
+		rl.on('line', input => {
+			if (input.toLowerCase() === 'east') {
+				return console.log('cannot go East');
+			}
+		});
+	},
+	cannotGoSouth() {
+		rl.on('line', input => {
+			if (input.toLowerCase() === 'south') {
+				return console.log('cannot go South');
+			}
+		});
+	},
+	cannotGoWest() {
+		rl.on('line', input => {
+			if (input.toLowerCase() === 'west') {
+				return console.log('cannot go west');
+			}
+		});
+	},
+	northEastCorner() {
+		rl.on('line', input => {
+			if (
+				input.toLowerCase() === 'north' ||
+				input.toLowerCase() === 'east'
+			) {
+				return console.log('you can only move to the South or West');
+			}
+		});
+	},
+
+	northWestCorner() {
+		rl.on('line', input => {
+			if (
+				input.toLowerCase() === 'north' ||
+				input.toLowerCase() === 'west'
+			) {
+				return console.log('you can only move South or East');
+			}
+		});
+	},
+
+	southEastCorner() {
+		rl.on('line', input => {
+			if (
+				input.toLowerCase() === 'south' ||
+				input.toLowerCase() === 'east'
+			) {
+				return console.log('you can only move South or West');
+			}
+		});
+	},
+
+	southWestCorner() {
+		rl.on('line', input => {
+			if (
+				input.toLowerCase() === 'south' ||
+				input.toLowerCase() === 'west'
+			) {
+				return console.log('you can only move South or East');
+			}
+		});
+	}
+};
+
+playGame.anyDirection();
+
 module.exports = {
 	loadCharacter,
 	loadEnemy,
@@ -308,5 +423,6 @@ module.exports = {
 	death,
 	leveling,
 	inventory,
-	moving
+	moving,
+	playGame
 };
