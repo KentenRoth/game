@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 const readline = require('readline');
 
+const playTheGame = require('../GameWorld/world');
 const buildCharacter = require('./createSaveDeleteCharacter');
 const buildEnemy = require('./createSaveDeleteEnemy');
 
@@ -273,6 +274,16 @@ const inventory = {
 	}
 };
 
+// ********** Playing the Game ********** \\
+
+const gameTime = {
+	play() {
+		//
+		return playTheGame.world[character.location].playArea();
+	}
+};
+
+// ********** Moving around the Map ********** \\
 const moving = {
 	gettingLocationNumber() {
 		return parseInt(character.location.slice(2, character.location.length));
@@ -659,6 +670,8 @@ const playGame = {
 		});
 	}
 };
+
+playTheGame.world[character.location].playArea();
 
 module.exports = {
 	loadCharacter,

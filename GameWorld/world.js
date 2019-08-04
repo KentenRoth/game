@@ -1,35 +1,57 @@
-const char = require('../Functions/createSaveDeleteCharacter');
 const enemy = require('../Functions/createSaveDeleteEnemy');
-const play = require('../Functions/gameFunctions');
-
-const character = char.loadCharacter();
-const thing = () => {
-	const position = character.location;
-	return world[position].playArea();
-};
 
 const world = {
 	il1: {
-		description:
-			'This is part one, optional directions are south and west.',
+		description: 'This is part one.',
+		canMove: 'northEastCorner',
 		playArea() {
 			enemy.createEnemy('DraggonFly', 'bug');
 			console.log(this.description);
 			console.log('optional directions: South or West');
-			return play.playGame.northEastCorner();
 		}
 	},
 
 	il2: {
-		description: 'this is part two'
+		description: 'this is part two',
+		canMove: 'cannotGoEast',
+		playArea() {
+			enemy.createEnemy('Dragon Fly', 'bug');
+			console.log(this.description);
+			console.log('optional directions: North, South, or West');
+			return plays.playGame.cannotGoEast();
+		}
 	},
 
 	il3: {
-		description: 'this is part three'
+		description: 'this is part three',
+		canMove: 'cannotGoEast',
+		playArea() {
+			enemy.createEnemy('Dragon Fly', 'bug');
+			console.log(this.description);
+			console.log('optional directions: North, South, or West');
+		}
+	},
+	il4: {
+		description: 'this is part four',
+		canMove: 'cannotGoEast',
+		playArea() {
+			enemy.createEnemy('Dragon Fly', 'bug');
+			console.log(this.description);
+			console.log('optional directions: North, South, or West');
+			return plays.playGame.cannotGoEast();
+		}
+	},
+
+	il5: {
+		description: 'this is part five',
+		canMove: 'southEastCorner',
+		playArea() {
+			enemy.createEnemy('Dragon Fly', 'bug');
+			console.log(this.description);
+			console.log('optional directions: North, or West');
+		}
 	}
 };
-
-thing();
 
 module.exports = {
 	world
