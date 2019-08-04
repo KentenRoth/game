@@ -64,29 +64,31 @@ const badGuy = {
 	},
 
 	takeDamage(num) {
-		enemy.hp = enemy.hp - num;
+		const target = loadEnemy();
+		target.hp = target.hp - num;
 
 		console.log(
-			chalk.green('You dealt ' + num + ' damage to the ' + enemy.name)
+			chalk.green('You dealt ' + num + ' damage to the ' + target.name)
 		);
-		if (enemy.hp <= 0) {
+		if (target.hp <= 0) {
 			return death.enemyDied();
 		}
 
 		console.log(
 			chalk.green(
-				enemy.name +
+				target.name +
 					' has ' +
-					chalk.green.inverse(enemy.hp + ' hp remaining.')
+					chalk.green.inverse(target.hp + ' hp remaining.')
 			)
 		);
 		attack.enemyAttack();
-		return this.saveEnemy(enemy);
+		return this.saveEnemy(target);
 	},
 	stats() {
-		console.log('Name: ' + enemy.name);
-		console.log('HP: ' + enemy.hp);
-		console.log('Weapon/Damage: ' + enemy.weapon + '/' + enemy.damage);
+		const target = loadEnemy();
+		console.log('Name: ' + target.name);
+		console.log('HP: ' + target.hp);
+		console.log('Weapon/Damage: ' + target.weapon + '/' + target.damage);
 	}
 };
 
@@ -94,16 +96,18 @@ const badGuy = {
 
 const attack = {
 	playerAttack() {
-		const painDished = character.weaponDamage;
+		const char = loadCharacter();
+		const target = loadEnemy();
+		const painDished = char.weaponDamage;
 		const stealthShotNumber = Math.floor(Math.random() * 101);
 
-		if (character.stealth >= stealthShotNumber) {
+		if (char.stealth >= stealthShotNumber) {
 			const sneakPainDished = painDished * 2;
 			console.log(chalk.green.inverse('Successful Sneak Attack'));
 			return badGuy.takeDamage(sneakPainDished);
 		}
 
-		if (enemy.defense === 0 && enemy.dodge === 0) {
+		if (target.defense === 0 && target.dodge === 0) {
 			return badGuy.takeDamage(painDished);
 		}
 
@@ -111,19 +115,21 @@ const attack = {
 	},
 
 	enemyAttack() {
+		const char = loadCharacter();
+		const target = loadEnemy();
 		const dodgeNumber = Math.floor(Math.random() * 101);
-		const enemyDamageNumber = enemy.damage;
-		const playerDefenseNumber = character.block / 100;
+		const enemyDamageNumber = target.damage;
+		const playerDefenseNumber = char.block / 100;
 
-		if (dodgeNumber < character.dodge) {
+		if (dodgeNumber < char.dodge) {
 			return console.log(
 				chalk.green(
-					`You dodge the incoming attack from the ${enemy.name}`
+					`You dodge the incoming attack from the ${target.name}`
 				)
 			);
 		}
 
-		const damageDealt = (enemy.damage = Math.round(
+		const damageDealt = (target.damage = Math.round(
 			enemyDamageNumber - playerDefenseNumber * enemyDamageNumber
 		));
 
@@ -131,20 +137,24 @@ const attack = {
 	},
 
 	playerAttackMath() {
+		const char = loadCharacter();
+		const target = loadEnemy();
 		const dodgeNumber = Math.floor(Math.random() * 101);
-		const playerDamageNumber = character.weaponDamage;
-		const enemyDefenseNumber = enemy.defense / 100;
+		const playerDamageNumber = char.weaponDamage;
+		const enemyDefenseNumber = target.defense / 100;
 
-		if (dodgeNumber < enemy.dodge) {
+		if (dodgeNumber < target.dodge) {
 			console.log(
 				chalk.yellow(
-					`With some nifty moves the ${enemy.name} dodged your attack`
+					`With some nifty moves the ${
+						target.name
+					} dodged your attack`
 				)
 			);
 			return this.enemyAttack();
 		}
 
-		const damageDealt = (character.damage = Math.round(
+		const damageDealt = (char.damage = Math.round(
 			playerDamageNumber - enemyDefenseNumber * playerDamageNumber
 		));
 		return badGuy.takeDamage(damageDealt);
@@ -162,8 +172,9 @@ const death = {
 	},
 
 	enemyDied() {
-		console.log(`Congrats you killed the ${enemy.name}`);
-		leveling.increaseXP(enemy.xpValue);
+		const target = loadEnemy();
+		console.log(`Congrats you killed the ${target.name}`);
+		leveling.increaseXP(target.xpValue);
 		badGuy.deleteEnemy();
 	},
 
@@ -243,6 +254,18 @@ const inventory = {
 	},
 
 	drinkHealthPotion() {
+		if (character.hp + 20 > character.maxHp) {
+			console.log(
+				chalk.green(`I didn't get the full use of that health potion`)
+			);
+			console.log(
+				chalk.green.inverse(
+					`I have reached my max hp of ${character.maxHp} hp`
+				)
+			);
+			character.hp = character.maxHp;
+			return this.dropItemFromInventory('health potion');
+		}
 		character.hp += 20;
 		console.log(chalk.green('That was one tasty health potion +20 hp'));
 		console.log(chalk.green.inverse(character.hp + ' hp remaining'));
@@ -321,7 +344,7 @@ const playGame = {
 				return moving.goWest();
 			}
 			if (input.toLowerCase() === 'attack') {
-				if (enemy.length !== 0) {
+				if (enemy.name !== undefined) {
 					return player.attack();
 				} else {
 					return console.log(
@@ -331,6 +354,10 @@ const playGame = {
 			}
 			if (input.toLowerCase() === 'drink potion') {
 				return inventory.itemInInventory('health potion');
+			}
+
+			if (input.toLowerCase() === 'enemy stats') {
+				return badGuy.stats();
 			}
 
 			if (input.toLowerCase() === 'exit') {
@@ -354,7 +381,7 @@ const playGame = {
 				return moving.goWest();
 			}
 			if (input.toLowerCase() === 'attack') {
-				if (enemy.length !== 0) {
+				if (enemy.name !== undefined) {
 					return player.attack();
 				} else {
 					return console.log(
@@ -364,6 +391,10 @@ const playGame = {
 			}
 			if (input.toLowerCase() === 'drink potion') {
 				return inventory.itemInInventory('health potion');
+			}
+
+			if (input.toLowerCase() === 'enemy stats') {
+				return badGuy.stats();
 			}
 
 			if (input.toLowerCase() === 'exit') {
@@ -386,7 +417,7 @@ const playGame = {
 				return moving.goWest();
 			}
 			if (input.toLowerCase() === 'attack') {
-				if (enemy.length !== 0) {
+				if (enemy.name !== undefined) {
 					return player.attack();
 				} else {
 					return console.log(
@@ -396,6 +427,10 @@ const playGame = {
 			}
 			if (input.toLowerCase() === 'drink potion') {
 				return inventory.itemInInventory('health potion');
+			}
+
+			if (input.toLowerCase() === 'enemy stats') {
+				return badGuy.stats();
 			}
 
 			if (input.toLowerCase() === 'exit') {
@@ -418,7 +453,7 @@ const playGame = {
 				return moving.goWest();
 			}
 			if (input.toLowerCase() === 'attack') {
-				if (enemy.length !== 0) {
+				if (enemy.name !== undefined) {
 					return player.attack();
 				} else {
 					return console.log(
@@ -428,6 +463,10 @@ const playGame = {
 			}
 			if (input.toLowerCase() === 'drink potion') {
 				return inventory.itemInInventory('health potion');
+			}
+
+			if (input.toLowerCase() === 'enemy stats') {
+				return badGuy.stats();
 			}
 
 			if (input.toLowerCase() === 'exit') {
@@ -450,7 +489,7 @@ const playGame = {
 				return moving.goSouth();
 			}
 			if (input.toLowerCase() === 'attack') {
-				if (enemy.length !== 0) {
+				if (enemy.name !== undefined) {
 					return player.attack();
 				} else {
 					return console.log(
@@ -460,6 +499,10 @@ const playGame = {
 			}
 			if (input.toLowerCase() === 'drink potion') {
 				return inventory.itemInInventory('health potion');
+			}
+
+			if (input.toLowerCase() === 'enemy stats') {
+				return badGuy.stats();
 			}
 
 			if (input.toLowerCase() === 'exit') {
@@ -475,29 +518,34 @@ const playGame = {
 			) {
 				return console.log('you can only move to the South or West');
 			}
-		});
-		if (input.toLowerCase() === 'south') {
-			return moving.goSouth();
-		}
-		if (input.toLowerCase() === 'west') {
-			return moving.goWest();
-		}
-		if (input.toLowerCase() === 'attack') {
-			if (enemy.length !== 0) {
-				return player.attack();
-			} else {
-				return console.log(
-					'You spin around to do an epic attack, but there is nothing there.'
-				);
+			if (input.toLowerCase() === 'south') {
+				return moving.goSouth();
 			}
-		}
-		if (input.toLowerCase() === 'drink potion') {
-			return inventory.itemInInventory('health potion');
-		}
+			if (input.toLowerCase() === 'west') {
+				return moving.goWest();
+			}
+			if (input.toLowerCase() === 'attack') {
+				const fight = loadEnemy();
+				if (fight.name !== undefined) {
+					return attack.playerAttack();
+				} else {
+					return console.log(
+						'You spin around to do an epic attack, but there is nothing there.'
+					);
+				}
+			}
+			if (input.toLowerCase() === 'drink potion') {
+				return inventory.itemInInventory('health potion');
+			}
 
-		if (input.toLowerCase() === 'exit') {
-			rl.close();
-		}
+			if (input.toLowerCase() === 'enemy stats') {
+				return badGuy.stats();
+			}
+
+			if (input.toLowerCase() === 'exit') {
+				rl.close();
+			}
+		});
 	},
 
 	northWestCorner() {
@@ -508,47 +556,14 @@ const playGame = {
 			) {
 				return console.log('you can only move South or East');
 			}
-		});
-		if (input.toLowerCase() === 'east') {
-			return moving.goEast();
-		}
-		if (input.toLowerCase() === 'south') {
-			return moving.goSouth();
-		}
-		if (input.toLowerCase() === 'attack') {
-			if (enemy.length !== 0) {
-				return player.attack();
-			} else {
-				return console.log(
-					'You spin around to do an epic attack, but there is nothing there.'
-				);
+			if (input.toLowerCase() === 'east') {
+				return moving.goEast();
 			}
-		}
-		if (input.toLowerCase() === 'drink potion') {
-			return inventory.itemInInventory('health potion');
-		}
-
-		if (input.toLowerCase() === 'exit') {
-			rl.close();
-		}
-	},
-
-	southEastCorner() {
-		rl.on('line', input => {
-			if (
-				input.toLowerCase() === 'south' ||
-				input.toLowerCase() === 'east'
-			) {
-				return console.log('you can only move South or West');
-			}
-			if (input.toLowerCase() === 'north') {
-				return moving.goNorth();
-			}
-			if (input.toLowerCase() === 'west') {
-				return moving.goWest();
+			if (input.toLowerCase() === 'south') {
+				return moving.goSouth();
 			}
 			if (input.toLowerCase() === 'attack') {
-				if (enemy.length !== 0) {
+				if (enemy.name !== undefined) {
 					return player.attack();
 				} else {
 					return console.log(
@@ -558,6 +573,47 @@ const playGame = {
 			}
 			if (input.toLowerCase() === 'drink potion') {
 				return inventory.itemInInventory('health potion');
+			}
+
+			if (input.toLowerCase() === 'enemy stats') {
+				return badGuy.stats();
+			}
+
+			if (input.toLowerCase() === 'exit') {
+				rl.close();
+			}
+		});
+	},
+
+	southEastCorner() {
+		rl.on('line', input => {
+			if (
+				input.toLowerCase() === 'south' ||
+				input.toLowerCase() === 'east'
+			) {
+				return console.log('you can only move North or West');
+			}
+			if (input.toLowerCase() === 'north') {
+				return moving.goNorth();
+			}
+			if (input.toLowerCase() === 'west') {
+				return moving.goWest();
+			}
+			if (input.toLowerCase() === 'attack') {
+				if (enemy.name !== undefined) {
+					return player.attack();
+				} else {
+					return console.log(
+						'You spin around to do an epic attack, but there is nothing there.'
+					);
+				}
+			}
+			if (input.toLowerCase() === 'drink potion') {
+				return inventory.itemInInventory('health potion');
+			}
+
+			if (input.toLowerCase() === 'enemy stats') {
+				return badGuy.stats();
 			}
 
 			if (input.toLowerCase() === 'exit') {
@@ -572,7 +628,7 @@ const playGame = {
 				input.toLowerCase() === 'south' ||
 				input.toLowerCase() === 'west'
 			) {
-				return console.log('you can only move South or East');
+				return console.log('you can only move North or East');
 			}
 			if (input.toLowerCase() === 'north') {
 				return moving.goNorth();
@@ -581,7 +637,7 @@ const playGame = {
 				return moving.goEast();
 			}
 			if (input.toLowerCase() === 'attack') {
-				if (enemy.length !== 0) {
+				if (enemy.name !== undefined) {
 					return player.attack();
 				} else {
 					return console.log(
@@ -591,6 +647,10 @@ const playGame = {
 			}
 			if (input.toLowerCase() === 'drink potion') {
 				return inventory.itemInInventory('health potion');
+			}
+
+			if (input.toLowerCase() === 'enemy stats') {
+				return badGuy.stats();
 			}
 
 			if (input.toLowerCase() === 'exit') {
