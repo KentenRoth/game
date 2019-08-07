@@ -99,16 +99,16 @@ const attack = {
 	playerAttack() {
 		const char = loadCharacter();
 		const target = loadEnemy();
-		const painDished = char.weaponDamage;
+		const painDished = character.weaponDamage;
 		const stealthShotNumber = Math.floor(Math.random() * 101);
 
-		if (char.stealth >= stealthShotNumber) {
+		if (character.stealth >= stealthShotNumber) {
 			const sneakPainDished = painDished * 2;
 			console.log(chalk.green.inverse('Successful Sneak Attack'));
 			return badGuy.takeDamage(sneakPainDished);
 		}
 
-		if (target.defense === 0 && target.dodge === 0) {
+		if (enemy.defense === 0 && enemy.dodge === 0) {
 			return badGuy.takeDamage(painDished);
 		}
 
@@ -274,15 +274,6 @@ const inventory = {
 	}
 };
 
-// ********** Playing the Game ********** \\
-
-const gameTime = {
-	play() {
-		//
-		return playTheGame.world[character.location].playArea();
-	}
-};
-
 // ********** Moving around the Map ********** \\
 const moving = {
 	gettingLocationNumber() {
@@ -293,6 +284,7 @@ const moving = {
 		const preFix = character.location.slice(0, 2);
 		character.location = `${preFix}${number}`;
 		player.saveCharacter(character);
+		playGame.play();
 	},
 
 	enterNEDungeon() {
@@ -339,339 +331,74 @@ const rl = readline.createInterface({
 	output: process.stdout
 });
 
+// ********** Play the Game ********** \\
 const playGame = {
-	anyDirection() {
-		rl.on('line', input => {
-			if (input.toLowerCase() === 'north') {
-				return moving.goNorth();
-			}
-			if (input.toLowerCase() === 'east') {
-				return moving.goEast();
-			}
-			if (input.toLowerCase() === 'south') {
-				return moving.goSouth();
-			}
-			if (input.toLowerCase() === 'west') {
-				return moving.goWest();
-			}
-			if (input.toLowerCase() === 'attack') {
-				if (enemy.name !== undefined) {
-					return player.attack();
-				} else {
-					return console.log(
-						'You spin around to do an epic attack, but there is nothing there.'
-					);
-				}
-			}
-			if (input.toLowerCase() === 'drink potion') {
-				return inventory.itemInInventory('health potion');
-			}
-
-			if (input.toLowerCase() === 'enemy stats') {
-				return badGuy.stats();
-			}
-
-			if (input.toLowerCase() === 'exit') {
-				rl.close();
-			}
-		});
+	play() {
+		const gameTime = playTheGame.world[character.location];
+		return gameTime.playArea();
 	},
 
-	cannotGoNorth() {
-		rl.on('line', input => {
-			if (input.toLowerCase() === 'north') {
-				return console.log('cannot go North');
-			}
-			if (input.toLowerCase() === 'east') {
-				return moving.goEast();
-			}
-			if (input.toLowerCase() === 'south') {
-				return moving.goSouth();
-			}
-			if (input.toLowerCase() === 'west') {
-				return moving.goWest();
-			}
-			if (input.toLowerCase() === 'attack') {
-				if (enemy.name !== undefined) {
-					return player.attack();
-				} else {
-					return console.log(
-						'You spin around to do an epic attack, but there is nothing there.'
-					);
-				}
-			}
-			if (input.toLowerCase() === 'drink potion') {
-				return inventory.itemInInventory('health potion');
-			}
-
-			if (input.toLowerCase() === 'enemy stats') {
-				return badGuy.stats();
-			}
-
-			if (input.toLowerCase() === 'exit') {
-				rl.close();
-			}
-		});
+	canWeMove(input) {
+		const array = playTheGame.world[character.location].canMove;
+		if (array.includes(input) === false) {
+			console.log(`You cannot go ${input}`);
+			return false;
+		}
+		if (input === 'north') {
+			return moving.goNorth();
+		}
+		if (input === 'east') {
+			return moving.goEast();
+		}
+		if (input === 'south') {
+			return moving.goSouth();
+		}
+		if (input === 'west') {
+			return moving.goWest();
+		}
 	},
-	cannotGoEast() {
+
+	directions() {
+		this.play();
 		rl.on('line', input => {
-			if (input.toLowerCase() === 'east') {
-				return console.log('cannot go East');
-			}
-			if (input.toLowerCase() === 'north') {
-				return moving.goNorth();
-			}
-			if (input.toLowerCase() === 'south') {
-				return moving.goSouth();
-			}
-			if (input.toLowerCase() === 'west') {
-				return moving.goWest();
-			}
-			if (input.toLowerCase() === 'attack') {
-				if (enemy.name !== undefined) {
-					return player.attack();
-				} else {
-					return console.log(
-						'You spin around to do an epic attack, but there is nothing there.'
-					);
-				}
-			}
-			if (input.toLowerCase() === 'drink potion') {
-				return inventory.itemInInventory('health potion');
-			}
-
-			if (input.toLowerCase() === 'enemy stats') {
-				return badGuy.stats();
-			}
-
-			if (input.toLowerCase() === 'exit') {
-				rl.close();
-			}
-		});
-	},
-	cannotGoSouth() {
-		rl.on('line', input => {
-			if (input.toLowerCase() === 'south') {
-				return console.log('cannot go South');
-			}
-			if (input.toLowerCase() === 'north') {
-				return moving.goNorth();
-			}
-			if (input.toLowerCase() === 'east') {
-				return moving.goEast();
-			}
-			if (input.toLowerCase() === 'west') {
-				return moving.goWest();
-			}
-			if (input.toLowerCase() === 'attack') {
-				if (enemy.name !== undefined) {
-					return player.attack();
-				} else {
-					return console.log(
-						'You spin around to do an epic attack, but there is nothing there.'
-					);
-				}
-			}
-			if (input.toLowerCase() === 'drink potion') {
-				return inventory.itemInInventory('health potion');
-			}
-
-			if (input.toLowerCase() === 'enemy stats') {
-				return badGuy.stats();
-			}
-
-			if (input.toLowerCase() === 'exit') {
-				rl.close();
-			}
-		});
-	},
-	cannotGoWest() {
-		rl.on('line', input => {
-			if (input.toLowerCase() === 'west') {
-				return console.log('cannot go west');
-			}
-			if (input.toLowerCase() === 'north') {
-				return moving.goNorth();
-			}
-			if (input.toLowerCase() === 'east') {
-				return moving.goEast();
-			}
-			if (input.toLowerCase() === 'south') {
-				return moving.goSouth();
-			}
-			if (input.toLowerCase() === 'attack') {
-				if (enemy.name !== undefined) {
-					return player.attack();
-				} else {
-					return console.log(
-						'You spin around to do an epic attack, but there is nothing there.'
-					);
-				}
-			}
-			if (input.toLowerCase() === 'drink potion') {
-				return inventory.itemInInventory('health potion');
-			}
-
-			if (input.toLowerCase() === 'enemy stats') {
-				return badGuy.stats();
-			}
-
-			if (input.toLowerCase() === 'exit') {
-				rl.close();
-			}
-		});
-	},
-	northEastCorner() {
-		rl.on('line', input => {
+			const action = input.toLowerCase();
 			if (
-				input.toLowerCase() === 'north' ||
-				input.toLowerCase() === 'east'
+				action === 'north' ||
+				action === 'east' ||
+				action === 'south' ||
+				action === 'west'
 			) {
-				return console.log('you can only move to the South or West');
+				this.canWeMove(action);
 			}
-			if (input.toLowerCase() === 'south') {
-				return moving.goSouth();
-			}
-			if (input.toLowerCase() === 'west') {
-				return moving.goWest();
-			}
-			if (input.toLowerCase() === 'attack') {
-				const fight = loadEnemy();
-				if (fight.name !== undefined) {
+			if (action === 'attack') {
+				const target = loadEnemy();
+				if (target.name !== undefined) {
 					return attack.playerAttack();
 				} else {
-					return console.log(
-						'You spin around to do an epic attack, but there is nothing there.'
-					);
+					console.log(enemy);
+					// return console.log(
+					// 	'You spin around to do an epic attack, but there is nothing there.'
+					// );
 				}
 			}
-			if (input.toLowerCase() === 'drink potion') {
+			if (action === 'drink potion') {
 				return inventory.itemInInventory('health potion');
 			}
 
-			if (input.toLowerCase() === 'enemy stats') {
+			if (action === 'my stats') {
+				return player.stats();
+			}
+
+			if (action === 'enemy stats') {
 				return badGuy.stats();
 			}
 
-			if (input.toLowerCase() === 'exit') {
-				rl.close();
-			}
-		});
-	},
-
-	northWestCorner() {
-		rl.on('line', input => {
-			if (
-				input.toLowerCase() === 'north' ||
-				input.toLowerCase() === 'west'
-			) {
-				return console.log('you can only move South or East');
-			}
-			if (input.toLowerCase() === 'east') {
-				return moving.goEast();
-			}
-			if (input.toLowerCase() === 'south') {
-				return moving.goSouth();
-			}
-			if (input.toLowerCase() === 'attack') {
-				if (enemy.name !== undefined) {
-					return player.attack();
-				} else {
-					return console.log(
-						'You spin around to do an epic attack, but there is nothing there.'
-					);
-				}
-			}
-			if (input.toLowerCase() === 'drink potion') {
-				return inventory.itemInInventory('health potion');
-			}
-
-			if (input.toLowerCase() === 'enemy stats') {
-				return badGuy.stats();
-			}
-
-			if (input.toLowerCase() === 'exit') {
-				rl.close();
-			}
-		});
-	},
-
-	southEastCorner() {
-		rl.on('line', input => {
-			if (
-				input.toLowerCase() === 'south' ||
-				input.toLowerCase() === 'east'
-			) {
-				return console.log('you can only move North or West');
-			}
-			if (input.toLowerCase() === 'north') {
-				return moving.goNorth();
-			}
-			if (input.toLowerCase() === 'west') {
-				return moving.goWest();
-			}
-			if (input.toLowerCase() === 'attack') {
-				if (enemy.name !== undefined) {
-					return player.attack();
-				} else {
-					return console.log(
-						'You spin around to do an epic attack, but there is nothing there.'
-					);
-				}
-			}
-			if (input.toLowerCase() === 'drink potion') {
-				return inventory.itemInInventory('health potion');
-			}
-
-			if (input.toLowerCase() === 'enemy stats') {
-				return badGuy.stats();
-			}
-
-			if (input.toLowerCase() === 'exit') {
-				rl.close();
-			}
-		});
-	},
-
-	southWestCorner() {
-		rl.on('line', input => {
-			if (
-				input.toLowerCase() === 'south' ||
-				input.toLowerCase() === 'west'
-			) {
-				return console.log('you can only move North or East');
-			}
-			if (input.toLowerCase() === 'north') {
-				return moving.goNorth();
-			}
-			if (input.toLowerCase() === 'east') {
-				return moving.goEast();
-			}
-			if (input.toLowerCase() === 'attack') {
-				if (enemy.name !== undefined) {
-					return player.attack();
-				} else {
-					return console.log(
-						'You spin around to do an epic attack, but there is nothing there.'
-					);
-				}
-			}
-			if (input.toLowerCase() === 'drink potion') {
-				return inventory.itemInInventory('health potion');
-			}
-
-			if (input.toLowerCase() === 'enemy stats') {
-				return badGuy.stats();
-			}
-
-			if (input.toLowerCase() === 'exit') {
+			if (action === 'exit') {
 				rl.close();
 			}
 		});
 	}
 };
-
-playTheGame.world[character.location].playArea();
 
 module.exports = {
 	loadCharacter,
