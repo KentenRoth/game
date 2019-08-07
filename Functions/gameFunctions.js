@@ -375,10 +375,9 @@ const playGame = {
 				if (target.name !== undefined) {
 					return attack.playerAttack();
 				} else {
-					console.log(enemy);
-					// return console.log(
-					// 	'You spin around to do an epic attack, but there is nothing there.'
-					// );
+					return console.log(
+						'You spin around to do an epic attack, but there is nothing there.'
+					);
 				}
 			}
 			if (action === 'drink potion') {
