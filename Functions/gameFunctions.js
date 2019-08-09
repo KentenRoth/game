@@ -168,7 +168,8 @@ const attack = {
 
 const death = {
 	playerDied() {
-		console.log(`The ${enemy.name} finished you off`);
+		const target = loadEnemy();
+		console.log(`The ${target.name} finished you off`);
 		console.log('You will now have to create a new character');
 		console.log('Next time keep a better eye on your HP!');
 		player.deleteCharacter();
