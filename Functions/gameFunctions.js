@@ -87,9 +87,11 @@ const badGuy = {
 	},
 	stats() {
 		const target = loadEnemy();
-		console.log('Name: ' + target.name);
-		console.log('HP: ' + target.hp);
-		console.log('Weapon/Damage: ' + target.weapon + '/' + target.damage);
+		console.log(chalk.red('Name: ' + target.name));
+		console.log(chalk.red('HP: ' + target.hp));
+		console.log(
+			chalk.red('Weapon/Damage: ' + target.weapon + '/' + target.damage)
+		);
 	}
 };
 
@@ -399,6 +401,8 @@ const playGame = {
 		});
 	}
 };
+
+playGame.directions();
 
 module.exports = {
 	loadCharacter,
