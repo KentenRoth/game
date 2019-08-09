@@ -36,6 +36,10 @@ const createEnemy = (name, type) => {
 			enemy.push(new enemyClass.Racoon(name));
 			return saveEnemy(enemy[0]);
 		}
+		if (lowerCaseType === 'crab') {
+			enemy.push(new enemyClass.Crab(name));
+			return saveEnemy(enemy[0]);
+		}
 		if (lowerCaseType === 'deer') {
 			enemy.push(new enemyClass.Deer(name));
 			return saveEnemy(enemy[0]);

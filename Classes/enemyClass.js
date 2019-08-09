@@ -71,6 +71,21 @@ class Bird extends Enemy {
 	xpValue = 12;
 }
 
+class Crab extends Enemy {
+	constructor(name) {
+		super(name);
+		this.name = name;
+	}
+	name;
+	type = 'Crab';
+	hp = 50;
+	weapon = 'Claws';
+	defense = 20;
+	damage = 10;
+	dodge = 5;
+	xpValue = 18;
+}
+
 class Deer extends Enemy {
 	constructor(name) {
 		super(name);
@@ -112,6 +127,7 @@ module.exports = {
 	Frog,
 	Bird,
 	Racoon,
+	Crab,
 	Deer,
 	Bigfoot
 };

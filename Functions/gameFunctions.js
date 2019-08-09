@@ -284,6 +284,7 @@ const moving = {
 		const preFix = character.location.slice(0, 2);
 		character.location = `${preFix}${number}`;
 		player.saveCharacter(character);
+		badGuy.deleteEnemy();
 		playGame.play();
 	},
 
