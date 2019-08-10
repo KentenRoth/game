@@ -60,7 +60,7 @@ class Ninja extends Character {
 	maxBlock = 20;
 	inventory = [];
 	xp = 0;
-	location = 7;
+	location = 'il7';
 }
 
 class Warrior extends Character {
@@ -85,7 +85,7 @@ class Warrior extends Character {
 	maxDodge = 40;
 	inventory = [];
 	xp = 0;
-	location = 7;
+	location = 'il7';
 }
 
 class Viking extends Character {
@@ -110,7 +110,7 @@ class Viking extends Character {
 	maxBlock = 60;
 	inventory = [];
 	xp = 0;
-	location = 7;
+	location = 'il7';
 }
 
 module.exports = {

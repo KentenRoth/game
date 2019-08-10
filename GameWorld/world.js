@@ -119,31 +119,53 @@ const world = {
 	},
 
 	il8: {
-		description: 'this is part three',
+		description:
+			'To the North is looks to be a clearing.  To the south the forest looks to become even more dense.  To the west is a mountain range, and to the east is a beach and the ocean.',
 		canMove: ['north', 'east', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('Dragon Fly', 'bug');
+			enemy.createEnemy('Raven', 'bird');
 			console.log(chalk.cyan(this.description));
-			console.log('optional directions: North, East, South, or West');
+			console.log(
+				chalk.cyan('optional directions: North, East, South, or West')
+			);
+			console.log(
+				chalk.yellow(
+					'You hear a squack.  After looking around you spot a raven.  That cannot be a good sign'
+				)
+			);
 		}
 	},
 	il9: {
-		description: 'this is part four',
+		description:
+			"To the north the forest looks like it starts to thin.  To the south is the most sketch forest you've ever seen.  To the west there is a large mountain, and to the east there is a beach that leads to the ocean.",
 		canMove: ['north', 'east', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('Dragon Fly', 'bug');
+			enemy.createEnemy('Racoon', 'racoon');
 			console.log(chalk.cyan(this.description));
-			console.log('optional directions: North, East, South, or West');
+			console.log(
+				chalk.cyan('optional directions: North, East, South, or West')
+			);
+			console.log(
+				chalk.yellow(
+					'You see a racoon.  This racoon is not happy to see you.'
+				)
+			);
 		}
 	},
 
 	il10: {
-		description: 'this is part five',
+		description:
+			'The cliff that falls into the ocean stops the route to the south.  To the north is more of this sketchy forest.  The west is a climb to the edge of a mountain range, and to the east is what looks like a beautiful beach.',
 		canMove: ['north', 'east', 'west'],
 		playArea() {
-			enemy.createEnemy('Dragon Fly', 'bug');
+			enemy.createEnemy('Bambi', 'deer');
 			console.log(chalk.cyan(this.description));
 			console.log('optional directions: North, East, or West');
+			console.log(
+				chalk.yellow(
+					"That deer.  You've seen him before.  Is that...Bambi?"
+				)
+			);
 		}
 	},
 

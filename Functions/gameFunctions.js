@@ -403,8 +403,6 @@ const playGame = {
 	}
 };
 
-playGame.directions();
-
 module.exports = {
 	loadCharacter,
 	loadEnemy,
