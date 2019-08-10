@@ -101,10 +101,17 @@ class Deer extends Enemy {
 	xpValue = 18;
 }
 
+// Need more animals
+// Fox
+// Mountain Goat
+// Mountain Lion
+// Large Bird
+
 // Need cave animals for dungeons
 // Bat
 // Salamander
 // Snake
+// Bear
 
 // Boss
 class Bigfoot extends Enemy {
