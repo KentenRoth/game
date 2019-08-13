@@ -44,6 +44,14 @@ const createEnemy = (name, type) => {
 			enemy.push(new enemyClass.Deer(name));
 			return saveEnemy(enemy[0]);
 		}
+		if (lowerCaseType === 'goat') {
+			enemy.push(new enemyClass.Goat(name));
+			return saveEnemy(enemy[0]);
+		}
+		if (lowerCaseType === 'lion') {
+			enemy.push(new enemyClass.Lion(name));
+			return saveEnemy(enemy[0]);
+		}
 		if (lowerCaseType === 'bigfoot') {
 			enemy.push(new enemyClass.Bigfoot(name));
 			return saveEnemy(enemy[0]);

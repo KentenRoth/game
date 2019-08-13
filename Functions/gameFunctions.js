@@ -177,7 +177,9 @@ const death = {
 
 	enemyDied() {
 		const target = loadEnemy();
-		console.log(`Congrats you killed the ${target.name}`);
+		console.log(
+			chalk.green.inverse(`Congrats you killed the ${target.name}`)
+		);
 		leveling.increaseXP(target.xpValue);
 		badGuy.deleteEnemy();
 	},
@@ -402,6 +404,8 @@ const playGame = {
 		});
 	}
 };
+
+playGame.directions();
 
 module.exports = {
 	loadCharacter,

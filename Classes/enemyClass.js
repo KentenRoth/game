@@ -86,6 +86,21 @@ class Crab extends Enemy {
 	xpValue = 18;
 }
 
+class Fox extends Enemey {
+	constructor(name) {
+		super(name);
+		this.name = name;
+	}
+	name;
+	type = 'Fox';
+	hp = 35;
+	weapon = 'Claws';
+	defense = 10;
+	damage = 10;
+	dodge = 45;
+	xpValue = 15;
+}
+
 class Deer extends Enemy {
 	constructor(name) {
 		super(name);
@@ -101,6 +116,35 @@ class Deer extends Enemy {
 	xpValue = 18;
 }
 
+class Goat extends Enemy {
+	constructor(name) {
+		super(name);
+		this.name = name;
+	}
+	name;
+	type = 'Goat';
+	hp = 65;
+	weapon = 'Antlers';
+	defense = 15;
+	damage = 15;
+	dodge = 30;
+	xpValue = 22;
+}
+
+class Lion extends Enemy {
+	constructor(name) {
+		super(name);
+		this.name = name;
+	}
+	name;
+	type = 'Lion';
+	hp = 95;
+	weapon = 'Claws';
+	defense = 10;
+	damage = 25;
+	dodge = 45;
+	xpValue = 30;
+}
 // Need more animals
 // Fox
 // Mountain Goat
@@ -135,6 +179,9 @@ module.exports = {
 	Bird,
 	Racoon,
 	Crab,
+	Fox,
 	Deer,
+	Goat,
+	Lion,
 	Bigfoot
 };
