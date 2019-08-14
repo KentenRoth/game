@@ -19,7 +19,7 @@ const world = {
 		description: "It's peacful along the beach.",
 		canMove: ['north', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('MudCrab', 'crab');
+			enemy.createEnemy('MudCrab', 'Crab');
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.cyan('Follow the beach to the North or South'));
 			console.log(chalk.gray('The ocean is to the East'));
@@ -38,7 +38,7 @@ const world = {
 			"The sand is warm and if it wasn't for these darn birds you would be alone",
 		canMove: ['north', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('Seagull', 'bird');
+			enemy.createEnemy('Seagull', 'Bird');
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.cyan('to the North and South is beach'));
 			console.log(chalk.gray('The ocean is to the East'));
@@ -54,7 +54,7 @@ const world = {
 		description: 'If only you had a beach towel right now.',
 		canMove: ['north', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('MudCrab', 'crab');
+			enemy.createEnemy('MudCrab', 'Crab');
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.cyan('to the North and South is beach'));
 			console.log(chalk.gray('The ocean is to the East'));
@@ -69,7 +69,7 @@ const world = {
 		description: 'The view out into the ocean is beautiful.',
 		canMove: ['north', 'west'],
 		playArea() {
-			enemy.createEnemy('Seagull', 'bird');
+			enemy.createEnemy('Seagull', 'Bird');
 			console.log(chalk.cyan(this.description));
 			console.log('To the North is more beach');
 			console.log(chalk.gray('The ocean is to the East and South'));
@@ -88,7 +88,7 @@ const world = {
 		description: 'The sun is shining through the leaves of the trees.',
 		canMove: ['south', 'east', 'west'],
 		playArea() {
-			enemy.createEnemy('Racoon', 'racoon');
+			enemy.createEnemy('Racoon', 'Racoon');
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.gray('The Ocean is to the North'));
 			console.log(chalk.cyan('To the East looks to be a beach'));
@@ -120,7 +120,7 @@ const world = {
 			"The forest has a lot of poison ivy.  Let's avoid that if possible",
 		canMove: ['north', 'east', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('Raven', 'bird');
+			enemy.createEnemy('Raven', 'Bird');
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.cyan('To the North is a clearing'));
 			console.log(chalk.cyan('To the East is a beach'));
@@ -140,7 +140,7 @@ const world = {
 			'The air feels heavy.  Maybe this is not the best forest to visit.',
 		canMove: ['north', 'east', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('Racoon', 'racoon');
+			enemy.createEnemy('Racoon', 'Racoon');
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.cyan('To the North the forest looks to clear'));
 			console.log(chalk.cyan('To the East is a beach'));
@@ -161,7 +161,7 @@ const world = {
 			"The air is thick and very little sun is cutting through the leaves.  Let's get out of here.",
 		canMove: ['north', 'east', 'west'],
 		playArea() {
-			enemy.createEnemy('Bambi', 'deer');
+			enemy.createEnemy('Bambi', 'Deer');
 			console.log(chalk.cyan(this.description));
 			console.log(
 				chalk.cyan('To the North the forest looks less sketchy.')
@@ -204,7 +204,7 @@ const world = {
 			'There is some snow on the ground.  The air is starting to thin at this elevation',
 		canMove: ['north', 'east', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('Red Fox', 'fox');
+			enemy.createEnemy('Red Fox', 'Fox');
 			console.log(chalk.cyan('To the North there is a decent'));
 			console.log(chalk.cyan('To the East is a clearing in the valley'));
 			console.log(chalk.cyan('To the South the mountains continue'));
@@ -218,7 +218,7 @@ const world = {
 			'This looks to be the highest point of the range.  You can see the whole island from here.',
 		canMove: ['north', 'east', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('Billy Goat', 'goat');
+			enemy.createEnemy('Billy Goat', 'Goat');
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.cyan('To the North is more mountains'));
 			console.log(chalk.cyan('To the East is a forest'));
@@ -234,7 +234,6 @@ const world = {
 			'These snow packed mountains are beautiful, but very cold.',
 		canMove: ['north', 'east', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('Dragon Fly', 'bug');
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.cyan('To the North is the peak of the range'));
 			console.log(
@@ -253,7 +252,7 @@ const world = {
 			'This is super sketchy.  There is sheer cliff that drops into the ocean.',
 		canMove: ['north', 'east', 'west'],
 		playArea() {
-			enemy.createEnemy('Mountain Lion', 'lion');
+			enemy.createEnemy('Mountain Lion', 'Lion');
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.cyan('To the North there is a decent'));
 			console.log(chalk.cyan('To the East is a clearing in the valley'));
