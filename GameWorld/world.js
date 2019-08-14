@@ -257,7 +257,7 @@ const world = {
 			console.log(chalk.cyan('To the North there is a decent'));
 			console.log(chalk.cyan('To the East is a clearing in the valley'));
 			console.log(chalk.cyan('To the South the mountains continue'));
-			console.log(chalk.cyan('To the West there is a nice looking lake'));
+			console.log(chalk.cyan('To the West there is a small lake'));
 			console.log(
 				chalk.yellow('There are mountain lion tracks here....')
 			);
@@ -265,104 +265,153 @@ const world = {
 	},
 
 	il16: {
-		description: 'This is part one.',
-		canMove: ['south', 'west'],
+		description: 'This valley has a great view of the mountains',
+		canMove: ['east', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('DraggonFly', 'bug');
-			console.log(chalk.cyan('The Ocean is to the North'));
+			enemy.createEnemy('Cardinal', 'Bird');
 			console.log(chalk.cyan(this.description));
-			console.log('optional directions: East, South, or West');
+			console.log(chalk.gray('The Ocean is to the North'));
+			console.log(chalk.cyan('To the East is the mountains'));
+			console.log(chalk.cyan('To the South is a calm looking lake'));
+			console.log(chalk.cyan('To the West is a rocky beach'));
+			console.log(chalk.yellow('There are birds flying around'));
 		}
 	},
 
 	il17: {
-		description: 'this is part two',
-		canMove: ['north', 'south', 'west'],
+		description: 'This lake is rather calm and very large',
+		canMove: ['north', 'east', 'south'],
 		playArea() {
 			enemy.createEnemy('Dragon Fly', 'bug');
 			console.log(chalk.cyan(this.description));
-			console.log('optional directions: North, East, South, or West');
+			console.log(chalk.cyan('To the North is a grassy valley'));
+			console.log(chalk.cyan('To the East is the mountain range'));
+			console.log(chalk.gray('To the South the grassy valley continues'));
+			console.log(chalk.gray('To the West is a lake'));
+			console.log(
+				chalk.yellow('There are a lot of bugs around this lake')
+			);
 		}
 	},
 
 	il18: {
-		description: 'this is part three',
-		canMove: ['north', 'south', 'west'],
+		description: 'You finally come to the south edge of this massive lake',
+		canMove: ['north', 'east', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('Dragon Fly', 'bug');
+			enemy.createEnemy('Bull Frog', 'Frog');
 			console.log(chalk.cyan(this.description));
-			console.log('optional directions: North, East, South, or West');
+			console.log(chalk.cyan('To the North is a lake'));
+			console.log(chalk.cyan('To the East is the mountain range'));
+			console.log(chalk.cyan('To the South the grassy valley contiues'));
+			console.log(
+				chalk.cyan('To the West is a river flushing into the ocean')
+			);
+			console.log(
+				console.log('The distinct sounds of a bull frog ring out')
+			);
 		}
 	},
 	il19: {
-		description: 'this is part four',
-		canMove: ['north', 'south', 'west'],
+		description:
+			"The grassy is high and brittle.  Let's hope it there isn't a spark",
+		canMove: ['north', 'east', 'south', 'west'],
 		playArea() {
-			enemy.createEnemy('Dragon Fly', 'bug');
+			enemy.createEnemy('Bull Snake', 'Snake');
 			console.log(chalk.cyan(this.description));
-			console.log('optional directions: North, East, South, or West');
+			console.log(
+				chalk.cyan(
+					'To the North the grassy continues to the edge of a lake'
+				)
+			);
+			console.log(chalk.cyan('To the East is the mountain range'));
+			console.log(chalk.cyan('To the South is a small lake'));
+			console.log(
+				chalk.cyan('To the West looks to be a swamp marsh area')
+			);
+			console.log(chalk.yellow('You hear something moving in the grass'));
 		}
 	},
 
 	il20: {
-		description: 'this is part five',
-		canMove: ['north', 'west'],
+		description:
+			'There is a small lake that looks to be fed from the snow runoff',
+		canMove: ['north', 'east', 'west'],
 		playArea() {
-			enemy.createEnemy('Dragon Fly', 'bug');
-			console.log(chalk.cyan('The ocean is to the South'));
+			enemy.createEnemy('Bull Frog', 'Frog');
 			console.log(chalk.cyan(this.description));
-			console.log('optional directions: North, East, or West');
+			console.log(chalk.cyan('To the North is grassy area'));
+			console.log(chalk.cyan('To the East is the mountain range'));
+			console.log(chalk.gray('To the South is the ocean'));
+			console.log(chalk.cyan('To the West is a nasty looking swamp'));
 		}
 	},
 
 	il21: {
-		description: 'This is part one.',
+		description:
+			'The Beach on this side of the island is rather rocket, but the sunset is nice.',
 		canMove: ['south', 'east'],
 		playArea() {
-			enemy.createEnemy('DraggonFly', 'bug');
-			console.log(chalk.cyan('The Ocean is to the North and West'));
 			console.log(chalk.cyan(this.description));
-			console.log('optional directions: East or South');
+			console.log(chalk.gray('To the North, and West is the ocean.'));
+			console.log(chalk.cyan('To the East is grassy Valley'));
+			console.log(chalk.cyan('To the South is more rocky beach'));
+			console.log(
+				chalk.yellow('There is nothing here but a beautiful sunset')
+			);
 		}
 	},
 
 	il22: {
-		description: 'this is part two',
-		canMove: ['north', 'south', 'east'],
+		description: 'This beach has massive rocks, but still enjoyable.',
+		canMove: ['north', 'south'],
 		playArea() {
-			enemy.createEnemy('Dragon Fly', 'bug');
+			enemy.createEnemy('Rock Crab', 'Crab');
 			console.log(chalk.cyan(this.description));
-			console.log('optional directions: North, East, or South');
+			console.log(chalk.cyan('To the North is more rocky beach'));
+			console.log(chalk.gray('To the East is a lake'));
+			console.log(chalk.cyan('To the South is river delta'));
+			console.log(chalk.gray('To the West is the ocean'));
+			console.log(chalk.yellow("Let's go crab hunting."));
 		}
 	},
 
 	il23: {
-		description: 'this is part three',
+		description: 'This river has a strange stench',
 		canMove: ['north', 'south', 'east'],
 		playArea() {
-			enemy.createEnemy('Dragon Fly', 'bug');
+			enemy.createEnemy('Bull Frog', 'Frog');
 			console.log(chalk.cyan(this.description));
-			console.log('optional directions: North, East, or South');
+			console.log(chalk.cyan('To the North is the rocky beach'));
+			console.log(chalk.cyan('To the East is edge of the massive lake'));
+			console.log(chalk.cyan('To the South is a swamp'));
+			console.log(chalk.gray('To the West is the ocean'));
+			console.log(chalk.yellow('Bull Frogs are everywhere'));
 		}
 	},
 	il24: {
-		description: 'this is part four',
+		description: 'This swamp is extra creepy, and smells very bad.',
 		canMove: ['north', 'south', 'east'],
 		playArea() {
-			enemy.createEnemy('Dragon Fly', 'bug');
+			enemy.createEnemy('Bull Snake', 'Snake');
 			console.log(chalk.cyan(this.description));
-			console.log('optional directions: North, East, or South');
+			console.log(chalk.cyan('To the North is the river delta'));
+			console.log(chalk.cyan('To the East is dry grassy area'));
+			console.log(chalk.cyan('To the South is gross Swamp'));
+			console.log(chalk.gray('To the West is the ocean'));
+			console.log(chalk.yellow('There are signs of snakes everywhere'));
 		}
 	},
 
 	il25: {
-		description: 'this is part five',
+		description: "Shrek wouldn't even make his home in this swamp",
 		canMove: ['north', 'east'],
 		playArea() {
-			enemy.createEnemy('Dragon Fly', 'bug');
+			enemy.createEnemy('Alligator', 'Gator');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('The ocean is to the South and West'));
-			console.log('optional directions: North or East');
+			console.log(chalk.cyan('To the North is more swamp'));
+			console.log(chalk.cyan('To the East is a small lake'));
+			console.log(chalk.gray('To the South and West is the ocean'));
+			console.log(chalk.yellow('Is that an.... Alligator??'));
 		}
 	}
 };
