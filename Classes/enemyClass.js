@@ -49,7 +49,7 @@ class Racoon extends Enemy {
 	name;
 	type = 'Racoon';
 	hp = 40;
-	weapon = 'claws';
+	weapon = 'Claws';
 	defense = 5;
 	damage = 15;
 	dodge = 20;
@@ -86,7 +86,7 @@ class Crab extends Enemy {
 	xpValue = 18;
 }
 
-class Fox extends Enemey {
+class Fox extends Enemy {
 	constructor(name) {
 		super(name);
 		this.name = name;
@@ -146,9 +146,6 @@ class Lion extends Enemy {
 	xpValue = 30;
 }
 // Need more animals
-// Fox
-// Mountain Goat
-// Mountain Lion
 // Large Bird
 
 // Need cave animals for dungeons
