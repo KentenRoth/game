@@ -181,11 +181,18 @@ const death = {
 			chalk.green.inverse(`Congrats you killed the ${target.name}`)
 		);
 		leveling.increaseXP(target.xpValue);
+		this.itemDropOnDeath();
 		badGuy.deleteEnemy();
 	},
 
 	itemDropOnDeath() {
-		// TODO add in function to see if an item was dropped upon killing enemy
+		const target = loadEnemy();
+		const dropOrNot = Math.floor(Math.random() * 10);
+		if (dropOrNot === 1) {
+			console.log(`The ${target.name} dropped a health potion`);
+			return true;
+		}
+		return false;
 	}
 };
 
