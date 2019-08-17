@@ -188,8 +188,11 @@ const death = {
 	itemDropOnDeath() {
 		const target = loadEnemy();
 		const dropOrNot = Math.floor(Math.random() * 10);
-		if (dropOrNot === 1) {
-			console.log(`The ${target.name} dropped a health potion`);
+		if (dropOrNot < 4) {
+			console.log(
+				chalk.green(`The ${target.name} dropped a health potion`)
+			);
+			inventory.addItemToInventrory('Health Potion');
 			return true;
 		}
 		return false;
@@ -245,16 +248,19 @@ const inventory = {
 			return console.log('You only have 5 inventory slots.');
 		}
 		character.inventory.push(item);
+		console.log(chalk.green(`${item} added to your inventory`));
 		return player.saveCharacter(character);
 	},
 
 	itemInInventory(item) {
-		if (character.inventory.includes(item)) {
-			if (item === 'health potion') {
+		const char = loadCharacter();
+		if (char.inventory.includes(item)) {
+			if (item === 'Health Potion') {
 				return this.drinkHealthPotion();
 			}
 			return this.dropItemFromInventory(item);
 		}
+
 		return console.log('Item not found in inventory');
 	},
 
@@ -267,22 +273,23 @@ const inventory = {
 	},
 
 	drinkHealthPotion() {
-		if (character.hp + 20 > character.maxHp) {
+		const char = loadCharacter();
+		if (char.hp + 20 > char.maxHp) {
 			console.log(
 				chalk.green(`I didn't get the full use of that health potion`)
 			);
 			console.log(
 				chalk.green.inverse(
-					`I have reached my max hp of ${character.maxHp} hp`
+					`I have reached my max hp of ${char.maxHp} hp`
 				)
 			);
-			character.hp = character.maxHp;
-			return this.dropItemFromInventory('health potion');
+			char.hp = char.maxHp;
+			return this.dropItemFromInventory('Health Potion');
 		}
-		character.hp += 20;
+		char.hp += 20;
 		console.log(chalk.green('That was one tasty health potion +20 hp'));
-		console.log(chalk.green.inverse(character.hp + ' hp remaining'));
-		return this.dropItemFromInventory('health potion');
+		console.log(chalk.green.inverse(char.hp + ' hp remaining'));
+		return this.dropItemFromInventory('Health Potion');
 	}
 };
 
@@ -394,7 +401,7 @@ const playGame = {
 				}
 			}
 			if (action === 'drink potion') {
-				return inventory.itemInInventory('health potion');
+				return inventory.itemInInventory('Health Potion');
 			}
 
 			if (action === 'my stats') {
