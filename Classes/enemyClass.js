@@ -86,6 +86,21 @@ class Crab extends Enemy {
 	xpValue = 18;
 }
 
+class Snake extends Enemy {
+	constructor(name) {
+		super(name);
+		this.name = name;
+	}
+	name;
+	type = 'Snake';
+	hp = 20;
+	weapon = 'Bite';
+	defense = 5;
+	damage = 10;
+	dodge = 45;
+	xpValue = 10;
+}
+
 class Fox extends Enemy {
 	constructor(name) {
 		super(name);
@@ -145,6 +160,21 @@ class Lion extends Enemy {
 	dodge = 45;
 	xpValue = 30;
 }
+
+class Gator extends Enemy {
+	constructor(name) {
+		super(name);
+		this.name = name;
+	}
+	name;
+	type = 'Gator';
+	hp = 100;
+	weapon = 'Teeth';
+	defense = 25;
+	damage = 35;
+	dodge = 5;
+	xpValue = 40;
+}
 // Need more animals
 // Large Bird
 
@@ -167,7 +197,7 @@ class Bigfoot extends Enemy {
 	defense = 45;
 	damage = 25;
 	dodge = 50;
-	xpValue = 35;
+	xpValue = 50;
 }
 
 module.exports = {
@@ -180,5 +210,6 @@ module.exports = {
 	Deer,
 	Goat,
 	Lion,
+	Gator,
 	Bigfoot
 };
