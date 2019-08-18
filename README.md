@@ -1,7 +1,5 @@
 # Dungeon Island
 
----
-
 ### Terminal Game
 
 This game is played in the terminal
@@ -32,7 +30,7 @@ enemy stats - Check the stats of the current enemy
 
 drink potion - Drink health potion to increase HP by 20
 
-exit - quit out of game
+exit - Quit game
 
 ---
 
@@ -71,7 +69,7 @@ _More enemies coming_
 -   Goat
 -   Mountain Lion
 -   Alligator
--   _Boss fight_ (You will have to find this one.)
+-   _Boss fight (You will have to find this one.)_
 
 ---
 
