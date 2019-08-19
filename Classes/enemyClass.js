@@ -181,7 +181,6 @@ class Gator extends Enemy {
 // Need cave animals for dungeons
 // Bat
 // Salamander
-// Snake
 // Bear
 
 // Boss
@@ -206,6 +205,7 @@ module.exports = {
 	Bird,
 	Racoon,
 	Crab,
+	Snake,
 	Fox,
 	Deer,
 	Goat,
