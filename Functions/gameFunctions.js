@@ -42,14 +42,15 @@ const player = {
 	},
 
 	takeDamage(num) {
-		character.hp -= num;
+		const char = loadCharacter();
+		char.hp -= num;
 		console.log(chalk.red('Ouch you lost ' + num + ' hp'));
-		if (character.hp <= 0) {
+		if (char.hp <= 0) {
 			return death.playerDied();
 		}
-		console.log(chalk.red.inverse(character.hp + ' hp remaining'));
+		console.log(chalk.red.inverse(char.hp + ' hp remaining'));
 
-		return this.saveCharacter(character);
+		return this.saveCharacter(char);
 	}
 };
 
@@ -101,7 +102,7 @@ const attack = {
 	playerAttack() {
 		const char = loadCharacter();
 		const target = loadEnemy();
-		const painDished = character.weaponDamage;
+		const painDished = char.weaponDamage;
 		const stealthShotNumber = Math.floor(Math.random() * 101);
 
 		if (character.stealth >= stealthShotNumber) {
@@ -296,13 +297,15 @@ const inventory = {
 // ********** Moving around the Map ********** \\
 const moving = {
 	gettingLocationNumber() {
-		return parseInt(character.location.slice(2, character.location.length));
+		const char = loadCharacter();
+		return parseInt(char.location.slice(2, char.location.length));
 	},
 
 	newLocationPosition(number) {
-		const preFix = character.location.slice(0, 2);
-		character.location = `${preFix}${number}`;
-		player.saveCharacter(character);
+		const char = loadCharacter();
+		const preFix = char.location.slice(0, 2);
+		char.location = `${preFix}${number}`;
+		player.saveCharacter(char);
 		badGuy.deleteEnemy();
 		playGame.play();
 	},
@@ -346,20 +349,54 @@ const moving = {
 	}
 };
 
+// ********** Play the Game ********** \\
 const rl = readline.createInterface({
 	input: process.stdin,
 	output: process.stdout
 });
 
-// ********** Play the Game ********** \\
+rl.question('Are you ready to play? (yes or no) ', input => {
+	const answer = input.toLowerCase();
+	if (answer === 'yes') {
+		const char = loadCharacter();
+		if (char.name === undefined) {
+			rl.question(
+				'What would you like to name your character? ',
+				name => {
+					if (name.length >= 1) {
+						rl.question(
+							'What class would you like to be? (Ninja, Warrior, or Viking) ',
+							classInput => {
+								buildCharacter.createCharacter(
+									name,
+									classInput
+								);
+								playGame.directions();
+							}
+						);
+					}
+				}
+			);
+		} else {
+			return playGame.directions();
+		}
+	}
+	if (answer === 'no') {
+		return rl.close();
+	}
+});
+
 const playGame = {
 	play() {
-		const gameTime = playTheGame.world[character.location];
+		const char = loadCharacter();
+		console.log(char.location);
+		const gameTime = playTheGame.world[char.location];
 		return gameTime.playArea();
 	},
 
 	canWeMove(input) {
-		const array = playTheGame.world[character.location].canMove;
+		const char = loadCharacter();
+		const array = playTheGame.world[char.location].canMove;
 		if (array.includes(input) === false) {
 			console.log(`You cannot go ${input}`);
 			return false;
