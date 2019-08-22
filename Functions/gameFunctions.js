@@ -31,14 +31,13 @@ const player = {
 	},
 
 	stats() {
-		console.log('Name: ' + character.name);
-		console.log('Class: ' + character.type);
-		console.log('Level: ' + character.level);
-		console.log('HP: ' + character.hp);
-		console.log(
-			'Weapon/Damage: ' + character.weapon + '/' + character.weaponDamage
-		);
-		console.log('Items: ', character.inventory);
+		const char = loadCharacter();
+		console.log('Name: ' + char.name);
+		console.log('Class: ' + char.type);
+		console.log('Level: ' + char.level);
+		console.log('HP: ' + char.hp);
+		console.log('Weapon/Damage: ' + char.weapon + '/' + char.weaponDamage);
+		console.log('Items: ', char.inventory);
 	},
 
 	takeDamage(num) {
@@ -111,7 +110,7 @@ const attack = {
 			return badGuy.takeDamage(sneakPainDished);
 		}
 
-		if (enemy.defense === 0 && enemy.dodge === 0) {
+		if (target.defense === 0 && target.dodge === 0) {
 			return badGuy.takeDamage(painDished);
 		}
 
@@ -204,39 +203,42 @@ const death = {
 
 const leveling = {
 	increaseXP(num) {
-		character.xp += num;
-		player.saveCharacter(character);
-		if (character.xp >= 100) {
+		const char = loadCharacter();
+		char.xp += num;
+		player.saveCharacter(char);
+		if (char.xp >= 100) {
 			this.levelUp();
 		}
 	},
 
 	levelUp() {
-		character.level++;
-		character.xp -= 100;
-		if (character.level % 3 === 0) {
+		const char = loadCharacter();
+		char.level++;
+		char.xp -= 100;
+		if (char.level % 3 === 0) {
 			this.levelUpStats();
 		}
 		console.log(chalk.magenta('You just leveled Up!'));
-		console.log(chalk.magenta.inverse(`Level ${character.level}`));
-		return player.saveCharacter(character);
+		console.log(chalk.magenta.inverse(`Level ${char.level}`));
+		return player.saveCharacter(char);
 	},
 
 	levelUpStats() {
-		if (character.hp < character.maxHp) {
-			character.hp += 5;
+		const char = loadCharacter();
+		if (char.hp < char.maxHp) {
+			char.hp += 5;
 		}
-		if (character.weaponDamage < character.maxWeaponDamage) {
-			character.weaponDamage += 5;
+		if (char.weaponDamage < char.maxWeaponDamage) {
+			char.weaponDamage += 5;
 		}
-		if (character.stealth < character.maxStealth) {
-			character.stealth += 5;
+		if (char.stealth < char.maxStealth) {
+			char.stealth += 5;
 		}
-		if (character.dodge < character.maxDodge) {
-			character.dodge += 5;
+		if (char.dodge < char.maxDodge) {
+			char.dodge += 5;
 		}
-		if (character.block < character.maxBlock) {
-			character.block += 5;
+		if (char.block < char.maxBlock) {
+			char.block += 5;
 		}
 	}
 };
@@ -245,12 +247,13 @@ const leveling = {
 
 const inventory = {
 	addItemToInventrory(item) {
-		if (character.inventory.length > 4) {
+		const char = loadCharacter();
+		if (char.inventory.length > 4) {
 			return console.log('You only have 5 inventory slots.');
 		}
-		character.inventory.push(item);
+		char.inventory.push(item);
 		console.log(chalk.green(`${item} added to your inventory`));
-		return player.saveCharacter(character);
+		return player.saveCharacter(char);
 	},
 
 	itemInInventory(item) {
@@ -266,10 +269,11 @@ const inventory = {
 	},
 
 	dropItemFromInventory(item) {
-		const index = character.inventory.indexOf(item);
+		const char = loadCharacter();
+		const index = char.inventory.indexOf(item);
 		if (index > -1) {
-			character.inventory.splice(index, 1);
-			return player.saveCharacter(character);
+			char.inventory.splice(index, 1);
+			return player.saveCharacter(char);
 		}
 	},
 
@@ -350,42 +354,6 @@ const moving = {
 };
 
 // ********** Play the Game ********** \\
-const rl = readline.createInterface({
-	input: process.stdin,
-	output: process.stdout
-});
-
-rl.question('Are you ready to play? (yes or no) ', input => {
-	const answer = input.toLowerCase();
-	if (answer === 'yes') {
-		const char = loadCharacter();
-		if (char.name === undefined) {
-			rl.question(
-				'What would you like to name your character? ',
-				name => {
-					if (name.length >= 1) {
-						rl.question(
-							'What class would you like to be? (Ninja, Warrior, or Viking) ',
-							classInput => {
-								buildCharacter.createCharacter(
-									name,
-									classInput
-								);
-								playGame.directions();
-							}
-						);
-					}
-				}
-			);
-		} else {
-			return playGame.directions();
-		}
-	}
-	if (answer === 'no') {
-		return rl.close();
-	}
-});
-
 const playGame = {
 	play() {
 		const char = loadCharacter();
@@ -413,46 +381,6 @@ const playGame = {
 		if (input === 'west') {
 			return moving.goWest();
 		}
-	},
-
-	directions() {
-		this.play();
-		rl.on('line', input => {
-			const action = input.toLowerCase();
-			if (
-				action === 'north' ||
-				action === 'east' ||
-				action === 'south' ||
-				action === 'west'
-			) {
-				this.canWeMove(action);
-			}
-			if (action === 'attack') {
-				const target = loadEnemy();
-				if (target.name !== undefined) {
-					return attack.playerAttack();
-				} else {
-					return console.log(
-						'You spin around to do an epic attack, but there is nothing there.'
-					);
-				}
-			}
-			if (action === 'drink potion') {
-				return inventory.itemInInventory('Health Potion');
-			}
-
-			if (action === 'my stats') {
-				return player.stats();
-			}
-
-			if (action === 'enemy stats') {
-				return badGuy.stats();
-			}
-
-			if (action === 'exit') {
-				rl.close();
-			}
-		});
 	}
 };
 
