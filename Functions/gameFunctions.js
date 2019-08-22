@@ -357,7 +357,6 @@ const moving = {
 const playGame = {
 	play() {
 		const char = loadCharacter();
-		console.log(char.location);
 		const gameTime = playTheGame.world[char.location];
 		return gameTime.playArea();
 	},
