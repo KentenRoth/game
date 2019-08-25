@@ -1,4 +1,5 @@
 const fs = require('fs');
+const chalk = require('chalk');
 const characterClass = require('../Classes/characterClass');
 
 const loadCharacter = () => {

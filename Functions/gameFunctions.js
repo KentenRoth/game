@@ -32,12 +32,16 @@ const player = {
 
 	stats() {
 		const char = loadCharacter();
-		console.log('Name: ' + char.name);
-		console.log('Class: ' + char.type);
-		console.log('Level: ' + char.level);
-		console.log('HP: ' + char.hp);
-		console.log('Weapon/Damage: ' + char.weapon + '/' + char.weaponDamage);
-		console.log('Items: ', char.inventory);
+		console.log(chalk.hex('#12b500')('Name: ' + char.name));
+		console.log(chalk.hex('#12b500')('Class: ' + char.type));
+		console.log(chalk.magenta('Level: ' + char.level));
+		console.log(chalk.hex('#12b500')('HP: ' + char.hp));
+		console.log(
+			chalk.hex('#12b500')(
+				'Weapon/Damage: ' + char.weapon + '/' + char.weaponDamage
+			)
+		);
+		console.log(chalk.hex('#12b500')('Items: ', char.inventory));
 	},
 
 	takeDamage(num) {
@@ -87,10 +91,15 @@ const badGuy = {
 	},
 	stats() {
 		const target = loadEnemy();
-		console.log(chalk.red('Name: ' + target.name));
-		console.log(chalk.red('HP: ' + target.hp));
+		if (target.name === undefined) {
+			return console.log(chalk.hex('#b50b02')('There is no enemy here.'));
+		}
+		console.log(chalk.hex('#b50b02')('Name: ' + target.name));
+		console.log(chalk.hex('#b50b02')('HP: ' + target.hp));
 		console.log(
-			chalk.red('Weapon/Damage: ' + target.weapon + '/' + target.damage)
+			chalk.hex('#b50b02')(
+				'Weapon/Damage: ' + target.weapon + '/' + target.damage
+			)
 		);
 	}
 };
@@ -149,9 +158,7 @@ const attack = {
 		if (dodgeNumber < target.dodge) {
 			console.log(
 				chalk.yellow(
-					`With some nifty moves the ${
-						target.name
-					} dodged your attack`
+					`With some nifty moves the ${target.name} dodged your attack`
 				)
 			);
 			return this.enemyAttack();

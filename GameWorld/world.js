@@ -9,8 +9,8 @@ const world = {
 		playArea() {
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.gray('North and East is the ocean.'));
-			console.log(chalk.cyan('Follow the beach to the South'));
-			console.log(chalk.cyan('There is a forest to the West'));
+			console.log(chalk.hex('#4772ff')('Follow the beach to the South'));
+			console.log(chalk.hex('#4772ff')('There is a forest to the West'));
 			console.log(chalk.yellow('You are alone on the beach.'));
 		}
 	},
@@ -21,11 +21,17 @@ const world = {
 		playArea() {
 			enemy.createEnemy('MudCrab', 'Crab');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('Follow the beach to the North or South'));
-			console.log(chalk.gray('The ocean is to the East'));
-			console.log(chalk.cyan('There looks to be a clearing to the West'));
 			console.log(
-				chalk.cyan('optional directions: North, South, or West')
+				chalk.hex('#4772ff')('Follow the beach to the North or South')
+			);
+			console.log(chalk.gray('The ocean is to the East'));
+			console.log(
+				chalk.hex('#4772ff')('There looks to be a clearing to the West')
+			);
+			console.log(
+				chalk.hex('#4772ff')(
+					'optional directions: North, South, or West'
+				)
 			);
 			console.log(
 				chalk.yellow('Is that a mudcrab?  Does it have a sweetroll?')
@@ -40,9 +46,13 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Seagull', 'Bird');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('to the North and South is beach'));
+			console.log(
+				chalk.hex('#4772ff')('to the North and South is beach')
+			);
 			console.log(chalk.gray('The ocean is to the East'));
-			console.log(chalk.cyan('To the West is brush and a forest'));
+			console.log(
+				chalk.hex('#4772ff')('To the West is brush and a forest')
+			);
 			console.log(
 				chalk.yellow(
 					'Why wont this seagull give you some peace and quite?'
@@ -56,10 +66,14 @@ const world = {
 		playArea() {
 			enemy.createEnemy('MudCrab', 'Crab');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('to the North and South is beach'));
+			console.log(
+				chalk.hex('#4772ff')('to the North and South is beach')
+			);
 			console.log(chalk.gray('The ocean is to the East'));
 			console.log(
-				chalk.cyan('The forest to the West is looking sketchy')
+				chalk.hex('#4772ff')(
+					'The forest to the West is looking sketchy'
+				)
 			);
 			console.log(chalk.yellow('The mudcrab looks confused'));
 		}
@@ -71,10 +85,12 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Seagull', 'Bird');
 			console.log(chalk.cyan(this.description));
-			console.log('To the North is more beach');
+			console.log(chalk.hex('#4772ff')('To the North is more beach'));
 			console.log(chalk.gray('The ocean is to the East and South'));
 			console.log(
-				chalk.cyan('To the West the forest looks dense and dark')
+				chalk.hex('#4772ff')(
+					'To the West the forest looks dense and dark'
+				)
 			);
 			console.log(
 				chalk.yellow(
@@ -91,9 +107,15 @@ const world = {
 			enemy.createEnemy('Racoon', 'Racoon');
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.gray('The Ocean is to the North'));
-			console.log(chalk.cyan('To the East looks to be a beach'));
-			console.log(chalk.cyan('To the South there is a clearing'));
-			console.log(chalk.cyan('To the West is a mountain range'));
+			console.log(
+				chalk.hex('#4772ff')('To the East looks to be a beach')
+			);
+			console.log(
+				chalk.hex('#4772ff')('To the South there is a clearing')
+			);
+			console.log(
+				chalk.hex('#4772ff')('To the West is a mountain range')
+			);
 			console.log(
 				chalk.yellow('You notice a racoon hiding in the tree.')
 			);
@@ -106,11 +128,13 @@ const world = {
 			'This clearing is calm, but gives you a sense you should push on.',
 		canMove: ['north', 'east', 'south', 'west'],
 		playArea() {
-			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North is a small forest'));
-			console.log(chalk.cyan('To the East is a beach'));
-			console.log(chalk.cyan('To the South is a thicker forest'));
-			console.log(chalk.cyan('To the West is the mountains'));
+			console.log(chalk.cyan.bold(this.description));
+			console.log(chalk.hex('#4772ff')('To the North is a small forest'));
+			console.log(chalk.hex('#4772ff')('To the East is a beach'));
+			console.log(
+				chalk.hex('#4772ff')('To the South is a thicker forest')
+			);
+			console.log(chalk.hex('#4772ff')('To the West is the mountains'));
 			console.log(chalk.yellow('You are alone in the clearing'));
 		}
 	},
@@ -122,12 +146,14 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Raven', 'Bird');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North is a clearing'));
-			console.log(chalk.cyan('To the East is a beach'));
+			console.log(chalk.hex('#4772ff')('To the North is a clearing'));
+			console.log(chalk.hex('#4772ff')('To the East is a beach'));
 			console.log(
-				chalk.cyan('To the South the forest becomes more dense')
+				chalk.hex('#4772ff')(
+					'To the South the forest becomes more dense'
+				)
 			);
-			console.log(chalk.cyan('To the West is the mountains'));
+			console.log(chalk.hex('#4772ff')('To the West is the mountains'));
 			console.log(
 				chalk.yellow(
 					'You hear a squack.  After looking around you spot a raven.'
@@ -142,12 +168,16 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Racoon', 'Racoon');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North the forest looks to clear'));
-			console.log(chalk.cyan('To the East is a beach'));
 			console.log(
-				chalk.cyan('To the South the forest looks very sketchy')
+				chalk.hex('#4772ff')('To the North the forest looks to clear')
 			);
-			console.log(chalk.cyan('To the West is the mountains'));
+			console.log(chalk.hex('#4772ff')('To the East is a beach'));
+			console.log(
+				chalk.hex('#4772ff')(
+					'To the South the forest looks very sketchy'
+				)
+			);
+			console.log(chalk.hex('#4772ff')('To the West is the mountains'));
 			console.log(
 				chalk.yellow(
 					'You see a racoon.  This racoon is not happy to see you.'
@@ -164,17 +194,19 @@ const world = {
 			enemy.createEnemy('Bambi', 'Deer');
 			console.log(chalk.cyan(this.description));
 			console.log(
-				chalk.cyan('To the North the forest looks less sketchy.')
+				chalk.hex('#4772ff')(
+					'To the North the forest looks less sketchy.'
+				)
 			);
-			console.log(chalk.cyan('To the East is a beach'));
+			console.log(chalk.hex('#4772ff')('To the East is a beach'));
 			console.log(chalk.gray('To the South is the ocean'));
 			console.log(
-				chalk.cyan('To the West is a steep climb into the mountains')
+				chalk.hex('#4772ff')(
+					'To the West is a steep climb into the mountains'
+				)
 			);
 			console.log(
-				chalk.yellow(
-					"That deer.  You've seen him before.  Is that...Bambi?"
-				)
+				chalk.yellow("That deer.  You've seen him befor, but where?")
 			);
 		}
 	},
@@ -186,12 +218,14 @@ const world = {
 		playArea() {
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.gray('To the North is the ocean'));
-			console.log(chalk.cyan('To the East is a small forest'));
+			console.log(chalk.hex('#4772ff')('To the East is a small forest'));
 			console.log(
-				chalk.cyan('To the South is a steep climb into the mountains')
+				chalk.hex('#4772ff')(
+					'To the South is a steep climb into the mountains'
+				)
 			);
 			console.log(
-				chalk.cyan(
+				chalk.hex('#4772ff')(
 					'To the West is a valley with the ocean in the distance'
 				)
 			);
@@ -205,10 +239,16 @@ const world = {
 		canMove: ['north', 'east', 'south', 'west'],
 		playArea() {
 			enemy.createEnemy('Red Fox', 'Fox');
-			console.log(chalk.cyan('To the North there is a decent'));
-			console.log(chalk.cyan('To the East is a clearing in the valley'));
-			console.log(chalk.cyan('To the South the mountains continue'));
-			console.log(chalk.cyan('To the West there is a nice looking lake'));
+			console.log(chalk.hex('#4772ff')('To the North there is a decent'));
+			console.log(
+				chalk.hex('#4772ff')('To the East is a clearing in the valley')
+			);
+			console.log(
+				chalk.hex('#4772ff')('To the South the mountains continue')
+			);
+			console.log(
+				chalk.hex('#4772ff')('To the West there is a nice looking lake')
+			);
 			console.log(chalk.yellow('Is that a fox?'));
 		}
 	},
@@ -220,10 +260,12 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Billy Goat', 'Goat');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North is more mountains'));
-			console.log(chalk.cyan('To the East is a forest'));
-			console.log(chalk.cyan('To the South is more mountains'));
-			console.log(chalk.cyan('To the West there a grassy valley'));
+			console.log(chalk.hex('#4772ff')('To the North is more mountains'));
+			console.log(chalk.hex('#4772ff')('To the East is a forest'));
+			console.log(chalk.hex('#4772ff')('To the South is more mountains'));
+			console.log(
+				chalk.hex('#4772ff')('To the West there a grassy valley')
+			);
 			console.log(
 				chalk.yellow("That goat things it's ontop of the world also")
 			);
@@ -235,12 +277,20 @@ const world = {
 		canMove: ['north', 'east', 'south', 'west'],
 		playArea() {
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North is the peak of the range'));
 			console.log(
-				chalk.cyan('To the East is forest the looks dark and thick')
+				chalk.hex('#4772ff')('To the North is the peak of the range')
 			);
-			console.log(chalk.cyan('To the South the mountains continue'));
-			console.log(chalk.cyan('To the West there is a grassy valley'));
+			console.log(
+				chalk.hex('#4772ff')(
+					'To the East is forest the looks dark and thick'
+				)
+			);
+			console.log(
+				chalk.hex('#4772ff')('To the South the mountains continue')
+			);
+			console.log(
+				chalk.hex('#4772ff')('To the West there is a grassy valley')
+			);
 			console.log(
 				chalk.yellow("You're alone on this part of the mountain")
 			);
@@ -254,10 +304,16 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Mountain Lion', 'Lion');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North there is a decent'));
-			console.log(chalk.cyan('To the East is a clearing in the valley'));
-			console.log(chalk.cyan('To the South the mountains continue'));
-			console.log(chalk.cyan('To the West there is a small lake'));
+			console.log(chalk.hex('#4772ff')('To the North there is a decent'));
+			console.log(
+				chalk.hex('#4772ff')('To the East is a clearing in the valley')
+			);
+			console.log(
+				chalk.hex('#4772ff')('To the South the mountains continue')
+			);
+			console.log(
+				chalk.hex('#4772ff')('To the West there is a small lake')
+			);
 			console.log(
 				chalk.yellow('There are mountain lion tracks here....')
 			);
@@ -271,9 +327,11 @@ const world = {
 			enemy.createEnemy('Cardinal', 'Bird');
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.gray('The Ocean is to the North'));
-			console.log(chalk.cyan('To the East is the mountains'));
-			console.log(chalk.cyan('To the South is a calm looking lake'));
-			console.log(chalk.cyan('To the West is a rocky beach'));
+			console.log(chalk.hex('#4772ff')('To the East is the mountains'));
+			console.log(
+				chalk.hex('#4772ff')('To the South is a calm looking lake')
+			);
+			console.log(chalk.hex('#4772ff')('To the West is a rocky beach'));
 			console.log(chalk.yellow('There are birds flying around'));
 		}
 	},
@@ -284,8 +342,12 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Dragon Fly', 'bug');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North is a grassy valley'));
-			console.log(chalk.cyan('To the East is the mountain range'));
+			console.log(
+				chalk.hex('#4772ff')('To the North is a grassy valley')
+			);
+			console.log(
+				chalk.hex('#4772ff')('To the East is the mountain range')
+			);
 			console.log(chalk.gray('To the South the grassy valley continues'));
 			console.log(chalk.gray('To the West is a lake'));
 			console.log(
@@ -300,11 +362,17 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Bull Frog', 'Frog');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North is a lake'));
-			console.log(chalk.cyan('To the East is the mountain range'));
-			console.log(chalk.cyan('To the South the grassy valley contiues'));
+			console.log(chalk.hex('#4772ff')('To the North is a lake'));
 			console.log(
-				chalk.cyan('To the West is a river flushing into the ocean')
+				chalk.hex('#4772ff')('To the East is the mountain range')
+			);
+			console.log(
+				chalk.hex('#4772ff')('To the South the grassy valley contiues')
+			);
+			console.log(
+				chalk.hex('#4772ff')(
+					'To the West is a river flushing into the ocean'
+				)
 			);
 			console.log(
 				console.log('The distinct sounds of a bull frog ring out')
@@ -319,14 +387,18 @@ const world = {
 			enemy.createEnemy('Bull Snake', 'Snake');
 			console.log(chalk.cyan(this.description));
 			console.log(
-				chalk.cyan(
+				chalk.hex('#4772ff')(
 					'To the North the grassy continues to the edge of a lake'
 				)
 			);
-			console.log(chalk.cyan('To the East is the mountain range'));
-			console.log(chalk.cyan('To the South is a small lake'));
 			console.log(
-				chalk.cyan('To the West looks to be a swamp marsh area')
+				chalk.hex('#4772ff')('To the East is the mountain range')
+			);
+			console.log(chalk.hex('#4772ff')('To the South is a small lake'));
+			console.log(
+				chalk.hex('#4772ff')(
+					'To the West looks to be a swamp marsh area'
+				)
 			);
 			console.log(chalk.yellow('You hear something moving in the grass'));
 		}
@@ -339,10 +411,14 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Bull Frog', 'Frog');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North is grassy area'));
-			console.log(chalk.cyan('To the East is the mountain range'));
+			console.log(chalk.hex('#4772ff')('To the North is grassy area'));
+			console.log(
+				chalk.hex('#4772ff')('To the East is the mountain range')
+			);
 			console.log(chalk.gray('To the South is the ocean'));
-			console.log(chalk.cyan('To the West is a nasty looking swamp'));
+			console.log(
+				chalk.hex('#4772ff')('To the West is a nasty looking swamp')
+			);
 		}
 	},
 
@@ -353,8 +429,10 @@ const world = {
 		playArea() {
 			console.log(chalk.cyan(this.description));
 			console.log(chalk.gray('To the North, and West is the ocean.'));
-			console.log(chalk.cyan('To the East is grassy Valley'));
-			console.log(chalk.cyan('To the South is more rocky beach'));
+			console.log(chalk.hex('#4772ff')('To the East is grassy Valley'));
+			console.log(
+				chalk.hex('#4772ff')('To the South is more rocky beach')
+			);
 			console.log(
 				chalk.yellow('There is nothing here but a beautiful sunset')
 			);
@@ -367,9 +445,11 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Rock Crab', 'Crab');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North is more rocky beach'));
+			console.log(
+				chalk.hex('#4772ff')('To the North is more rocky beach')
+			);
 			console.log(chalk.gray('To the East is a lake'));
-			console.log(chalk.cyan('To the South is river delta'));
+			console.log(chalk.hex('#4772ff')('To the South is river delta'));
 			console.log(chalk.gray('To the West is the ocean'));
 			console.log(chalk.yellow("Let's go crab hunting."));
 		}
@@ -381,9 +461,13 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Bull Frog', 'Frog');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North is the rocky beach'));
-			console.log(chalk.cyan('To the East is edge of the massive lake'));
-			console.log(chalk.cyan('To the South is a swamp'));
+			console.log(
+				chalk.hex('#4772ff')('To the North is the rocky beach')
+			);
+			console.log(
+				chalk.hex('#4772ff')('To the East is edge of the massive lake')
+			);
+			console.log(chalk.hex('#4772ff')('To the South is a swamp'));
 			console.log(chalk.gray('To the West is the ocean'));
 			console.log(chalk.yellow('Bull Frogs are everywhere'));
 		}
@@ -394,9 +478,11 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Bull Snake', 'Snake');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North is the river delta'));
-			console.log(chalk.cyan('To the East is dry grassy area'));
-			console.log(chalk.cyan('To the South is gross Swamp'));
+			console.log(
+				chalk.hex('#4772ff')('To the North is the river delta')
+			);
+			console.log(chalk.hex('#4772ff')('To the East is dry grassy area'));
+			console.log(chalk.hex('#4772ff')('To the South is gross Swamp'));
 			console.log(chalk.gray('To the West is the ocean'));
 			console.log(chalk.yellow('There are signs of snakes everywhere'));
 		}
@@ -408,8 +494,8 @@ const world = {
 		playArea() {
 			enemy.createEnemy('Alligator', 'Gator');
 			console.log(chalk.cyan(this.description));
-			console.log(chalk.cyan('To the North is more swamp'));
-			console.log(chalk.cyan('To the East is a small lake'));
+			console.log(chalk.hex('#4772ff')('To the North is more swamp'));
+			console.log(chalk.hex('#4772ff')('To the East is a small lake'));
 			console.log(chalk.gray('To the South and West is the ocean'));
 			console.log(chalk.yellow('Is that an.... Alligator??'));
 		}
