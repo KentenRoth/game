@@ -10,6 +10,8 @@ const {
 	deleteEnemy
 } = require('../Functions/createSaveDeleteEnemy');
 
+const { player, badGuy, leveling } = require('../Functions/gameFunctions');
+
 describe('Create Save Delete Character file', () => {
 	it('should create a new Ninja character', () => {
 		createCharacter('Kent', 'Ninja');
@@ -103,5 +105,29 @@ describe('Create Save Delete Enemy file', () => {
 		expect(loadEnemy()).toHaveProperty('name', 'BigFoot');
 		expect(loadEnemy()).toHaveProperty('type', 'Bigfoot');
 		deleteEnemy();
+	});
+});
+
+describe('player and badGuy functions', () => {
+	it('should return a new hp after player takes damage', () => {
+		createCharacter('Kent', 'Ninja');
+		player.takeDamage(10);
+		expect(loadCharacter()).toHaveProperty('hp', 90);
+		deleteCharacter();
+	});
+	it('should return a new hp after enemy takes damage', () => {
+		createEnemy('frog', 'Frog');
+		badGuy.takeDamage(10);
+		expect(loadEnemy()).toHaveProperty('hp', 25);
+		deleteEnemy();
+	});
+});
+
+describe('leveling functions', () => {
+	it('should return return level 1', () => {
+		createCharacter('Kent', 'Ninja');
+		leveling.increaseXP(100);
+		expect(loadCharacter()).toHaveProperty('level', 1);
+		deleteCharacter();
 	});
 });
