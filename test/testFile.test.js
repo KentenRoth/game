@@ -124,10 +124,26 @@ describe('player and badGuy functions', () => {
 });
 
 describe('leveling functions', () => {
+	it('should increase the player XP', () => {
+		createCharacter('Kent', 'Ninja');
+		leveling.increaseXP(20);
+		expect(loadCharacter()).toHaveProperty('xp', 20);
+		deleteCharacter();
+	});
 	it('should return return level 1', () => {
 		createCharacter('Kent', 'Ninja');
 		leveling.increaseXP(100);
 		expect(loadCharacter()).toHaveProperty('level', 1);
+		expect(loadCharacter()).toHaveProperty('xp', 0);
+		deleteCharacter();
+	});
+	it('should increase weapon damage after 3 levels', () => {
+		createCharacter('Kent', 'Ninja');
+		leveling.increaseXP(100);
+		leveling.increaseXP(100);
+		leveling.increaseXP(100);
+		expect(loadCharacter()).toHaveProperty('level', 3);
+		expect(loadCharacter()).toHaveProperty('weaponDamage', 15);
 		deleteCharacter();
 	});
 });

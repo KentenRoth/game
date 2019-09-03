@@ -18,6 +18,7 @@ loadEnemy = () => {
 
 const character = loadCharacter();
 const enemy = loadEnemy();
+let counter = 0;
 
 // ********** Player Functions ********** \\
 
@@ -222,12 +223,14 @@ const leveling = {
 		const char = loadCharacter();
 		char.level++;
 		char.xp -= 100;
+		counter++;
+		player.saveCharacter(char);
+		console.log(counter);
 		if (char.level % 3 === 0) {
 			this.levelUpStats();
 		}
 		console.log(chalk.magenta('You just leveled Up!'));
 		console.log(chalk.magenta.inverse(`Level ${char.level}`));
-		return player.saveCharacter(char);
 	},
 
 	levelUpStats() {
@@ -247,6 +250,12 @@ const leveling = {
 		if (char.block < char.maxBlock) {
 			char.block += 5;
 		}
+		console.log(char);
+		return player.saveCharacter(char);
+	},
+
+	clearLevelCounter() {
+		return (counter = 0);
 	}
 };
 
