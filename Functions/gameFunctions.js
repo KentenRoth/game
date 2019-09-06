@@ -18,7 +18,6 @@ loadEnemy = () => {
 
 const character = loadCharacter();
 const enemy = loadEnemy();
-let counter = 0;
 
 // ********** Player Functions ********** \\
 
@@ -223,7 +222,6 @@ const leveling = {
 		const char = loadCharacter();
 		char.level++;
 		char.xp -= 100;
-		counter++;
 		player.saveCharacter(char);
 		console.log(counter);
 		if (char.level % 3 === 0) {
@@ -252,10 +250,6 @@ const leveling = {
 		}
 		console.log(char);
 		return player.saveCharacter(char);
-	},
-
-	clearLevelCounter() {
-		return (counter = 0);
 	}
 };
 
