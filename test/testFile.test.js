@@ -14,7 +14,8 @@ const {
 	player,
 	badGuy,
 	leveling,
-	inventory
+	inventory,
+	moving
 } = require('../Functions/gameFunctions');
 
 describe('Create Save Delete Character file', () => {
@@ -173,6 +174,31 @@ describe('Inventory functions', () => {
 		inventory.drinkHealthPotion();
 		expect(loadCharacter()).toHaveProperty('inventory', []);
 		expect(loadCharacter()).toHaveProperty('hp', 120);
+		deleteCharacter();
+	});
+});
+
+describe('Moving Functions', () => {
+	it('should subtract 1 by moving to the north', () => {
+		createCharacter('Kent', 'Ninja');
+		moving.goNorth();
+		expect(loadCharacter()).toHaveProperty('location', 'il6');
+		deleteEnemy();
+	});
+	it('should add 1 by moving to the south', () => {
+		moving.goSouth();
+		expect(loadCharacter()).toHaveProperty('location', 'il7');
+		deleteEnemy();
+	});
+	it('should add 5 by moving west', () => {
+		moving.goWest();
+		expect(loadCharacter()).toHaveProperty('location', 'il12');
+		deleteEnemy();
+	});
+	it('should subtract 5 by moving east', () => {
+		moving.goEast();
+		expect(loadCharacter()).toHaveProperty('location', 'il7');
+		deleteEnemy();
 		deleteCharacter();
 	});
 });
