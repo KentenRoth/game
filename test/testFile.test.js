@@ -10,7 +10,12 @@ const {
 	deleteEnemy
 } = require('../Functions/createSaveDeleteEnemy');
 
-const { player, badGuy, leveling } = require('../Functions/gameFunctions');
+const {
+	player,
+	badGuy,
+	leveling,
+	inventory
+} = require('../Functions/gameFunctions');
 
 describe('Create Save Delete Character file', () => {
 	it('should create a new Ninja character', () => {
@@ -144,6 +149,30 @@ describe('leveling functions', () => {
 		leveling.increaseXP(100);
 		expect(loadCharacter()).toHaveProperty('level', 3);
 		expect(loadCharacter()).toHaveProperty('weaponDamage', 15);
+		deleteCharacter();
+	});
+});
+
+describe('Inventory functions', () => {
+	it('Should add an item to the inventory', () => {
+		createCharacter('Kent', 'Ninja');
+		inventory.addItemToInventrory('Potion');
+		expect(loadCharacter()).toHaveProperty('inventory', ['Potion']);
+	});
+
+	it('Should remove the item from the inventory', () => {
+		inventory.itemInInventory('Potion');
+		expect(loadCharacter()).toHaveProperty('inventory', []);
+		deleteCharacter();
+	});
+
+	it('Should drink a potion and remove from inventory', () => {
+		createCharacter('Kent', 'Ninja');
+		inventory.addItemToInventrory('Health Potion');
+		expect(loadCharacter()).toHaveProperty('inventory', ['Health Potion']);
+		inventory.drinkHealthPotion();
+		expect(loadCharacter()).toHaveProperty('inventory', []);
+		expect(loadCharacter()).toHaveProperty('hp', 120);
 		deleteCharacter();
 	});
 });

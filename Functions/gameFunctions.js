@@ -223,7 +223,6 @@ const leveling = {
 		char.level++;
 		char.xp -= 100;
 		player.saveCharacter(char);
-		console.log(counter);
 		if (char.level % 3 === 0) {
 			this.levelUpStats();
 		}
@@ -248,7 +247,6 @@ const leveling = {
 		if (char.block < char.maxBlock) {
 			char.block += 5;
 		}
-		console.log(char);
 		return player.saveCharacter(char);
 	}
 };
@@ -304,6 +302,7 @@ const inventory = {
 		char.hp += 20;
 		console.log(chalk.green('That was one tasty health potion +20 hp'));
 		console.log(chalk.green.inverse(char.hp + ' hp remaining'));
+		player.saveCharacter(char);
 		return this.dropItemFromInventory('Health Potion');
 	}
 };
